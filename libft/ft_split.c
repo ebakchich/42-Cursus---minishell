@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 22:13:55 by ebakchic          #+#    #+#             */
-/*   Updated: 2021/12/06 15:31:06 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/04 23:08:08 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../minishell.h"
 
-static int	count_words(char const *s, char c)
+static int	count_words(char *s, char c)
 {
 	int	i;
 	int	count;
+	char	*ar;
 
+	ar = ft_strdup("'|'");
+	ar[0] = 34;
+	ar[2] = 34;
 	i = 0;
 	count = 0;
 	while (s[i] && s[i] == c)
@@ -25,10 +30,13 @@ static int	count_words(char const *s, char c)
 	{
 		while (s[i] && s[i] != c)
 			i++;
-		count++;
+		if (ft_chrafter(s, i, 34) && ft_chrafter(s, i, 39) && s[i] == c)
+			count++;
 		while (s[i] && s[i] == c)
 			i++;
 	}
+	count++;
+	free(ar);
 	return (count);
 }
 
@@ -43,7 +51,7 @@ static char	**free_allocation(char **arr, int k)
 	return (NULL);
 }
 
-static char	**ft_allocate(char const *s, char c, char **arr, int words)
+static char	**ft_allocate(char *s, char c, char **arr, int words)
 {
 	int	i;
 	int	len;
@@ -60,6 +68,11 @@ static char	**ft_allocate(char const *s, char c, char **arr, int words)
 		i = len;
 		while (s[i] && s[i] != c)
 			i++;
+		// while (ft_can(s, i))
+		// {
+		// 	printf("hjg\n");
+		// 	i++;
+		// }
 		arr[k] = malloc((i - len + 1) * sizeof(char));
 		if (!arr[k])
 			return (free_allocation(arr, k));
@@ -71,7 +84,7 @@ static char	**ft_allocate(char const *s, char c, char **arr, int words)
 	return (arr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**arr;
 	int		words;
@@ -79,6 +92,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	words = count_words(s, c);
+	printf("word = %d\n", words);  ///?????
 	arr = malloc((words + 1) * sizeof(char *));
 	if (!arr)
 		return (NULL);

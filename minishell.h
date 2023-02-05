@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/01/28 14:54:10 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/04 16:59:15 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct t_cmd
     char    **envp;
 }   t_cmd;
 
-char    **ft_split(char const *s, char c);
+char    **ft_split(char *s, char c);
+int     ft_check_quote(char *line);
+int     ft_count_c(char *line, int c);
+char	*ft_strchr(const char *s, int c);
+char    *ft_strchr(const char *s, int c);
+int     ft_memcmp(const void *s1, const void *s2, size_t n);
+char	*ft_strdup(const char *s1);
+int     ft_chrafter(char *line, int i, int c);
 
 #endif
