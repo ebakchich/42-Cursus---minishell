@@ -17,11 +17,7 @@ static int	count_words(char *s, char c)
 {
 	int	i;
 	int	count;
-	char	*ar;
 
-	ar = ft_strdup("'|'");
-	ar[0] = 34;
-	ar[2] = 34;
 	i = 0;
 	count = 0;
 	while (s[i] && s[i] == c)
@@ -30,13 +26,10 @@ static int	count_words(char *s, char c)
 	{
 		while (s[i] && s[i] != c)
 			i++;
-		if (ft_chrafter(s, i, 34) && ft_chrafter(s, i, 39) && s[i] == c)
-			count++;
+		count++;
 		while (s[i] && s[i] == c)
 			i++;
 	}
-	count++;
-	free(ar);
 	return (count);
 }
 
@@ -68,11 +61,6 @@ static char	**ft_allocate(char *s, char c, char **arr, int words)
 		i = len;
 		while (s[i] && s[i] != c)
 			i++;
-		// while (ft_can(s, i))
-		// {
-		// 	printf("hjg\n");
-		// 	i++;
-		// }
 		arr[k] = malloc((i - len + 1) * sizeof(char));
 		if (!arr[k])
 			return (free_allocation(arr, k));

@@ -34,5 +34,7 @@ char    *ft_strchr(const char *s, int c);
 int     ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strdup(const char *s1);
 int     ft_chrafter(char *line, int i, int c);
+int     ft_chrafterr(char *line, int i);
+size_t  ft_strlen(const char *s);
 
 #endif

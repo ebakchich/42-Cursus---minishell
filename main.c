@@ -45,30 +45,80 @@ int	ft_chrafter(char *line, int i, int c)
 	return (1);
 }
 
+int	ft_chrq(char *line, int j, int i)
+{
+	while (i < j)
+	{
+		if (line[i] == 34 || line[i] == 39)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+int	ft_chrafterr(char *line, int j)
+{
+	int		i;
+	char	c;
+	int 	count;
+
+	count = 0;
+	i = ft_chrq(line, j, 0);
+	c = line[i];
+	while (i < j)
+	{
+		if (line[i] == c)
+			count++;
+		if ((count % 2) == 0)
+		{
+			i = ft_chrq(line, j, i);
+			c = line[i];
+		}
+		i++;
+	}
+	if (count % 2)
+		return (0);
+	return (1);
+}
+
+void	ft_chng_pipe(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_chrafterr(line, i) && line[i] == '|')
+			line[i] = -1;
+		i++;
+	}
+}
+
 int	ft_check_error(char *line, char *l, int x)
 {
 	int		i;
 
 	i = 0;
-	if (l[0] == '|')
+	if (l[0] == '|' || l[ft_strlen(l) - 1] == '|')
 	{
 		printf("parse error near '%c'\n", line[i]);
 		return (-1);
 	}
 	while(line[i])
 	{
-		if (ft_chrafter(l, x, 34) && ft_chrafter(l, x, 39) && line[i] == '<' && line[i + 1] == '<')
+		if (ft_chrafterr(l, x) && line[i] == '<' && line[i + 1] == '<')
 			return (ft_red_chr(&line[i + 2]));
-		else if (ft_chrafter(l, x, 34) && ft_chrafter(l, x, 39) && line[i] == '>' && line[i + 1] == '>')
+		else if (ft_chrafterr(l, x) && line[i] == '>' && line[i + 1] == '>')
 			return (ft_red_chr(&line[i + 2]));
-		else if (ft_chrafter(l, x, 34) && ft_chrafter(l, x, 39) && line[i] == '>')
+		else if (ft_chrafterr(l, x) && line[i] == '>')
 			return (ft_red_chr(&line[i + 1]));
-		else if (ft_chrafter(l, x, 34) && ft_chrafter(l, x, 39) && line[i] == '<')
+		else if (ft_chrafterr(l, x) && line[i] == '<')
 			return (ft_red_chr(&line[i + 1]));
-		else if (ft_chrafter(l, x, 34) && ft_chrafter(l, x, 39) && line[i] == '|')
+		else if (ft_chrafterr(l, x) && line[i] == '|')
 			return (ft_red_chr(&line[i + 1]));
 		i++;
 	}
+	ft_chng_pipe(line);
 	return (0);
 }
 
@@ -77,31 +127,29 @@ void	ft_parse(char *line)
 	char	**full_cmd;
 	int	i;
 
-	//ft_check_quote(line);
+	if (line[0] == '\0')
+		return ;
 	i = 0;
 	while (line[i])
 	{
 		if (ft_strchr("<>|", line[i]))
-		{
 			if (ft_check_error(line + i, line, i))
 				return ;
-		}
 		i++;
 	}
-	if (line[0] != '\0')
-		full_cmd = ft_split(line, '|');
+	full_cmd = ft_split(line, -1);
 	// if (full_cmd == NULL)
 	// {
 	// 	printf("parse error\n");
 	// 	return ;
 	// }
 	//ft_getcmd(line, full_cmd, cmd);
-	i = 0;
-	while (full_cmd[i])
-	{
-		printf("%s\n", full_cmd[i]);
-		i++;
-	}
+	// i = 0;
+	// while (full_cmd[i])
+	// {
+	// 	printf("%s\n", full_cmd[i]);
+	// 	i++;
+	// }
 	free(full_cmd);
 }
 
