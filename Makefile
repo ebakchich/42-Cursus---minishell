@@ -1,4 +1,4 @@
-SRCS    = main.c ft_check_quote.c
+SRCS    = main.c ft_check_quote.c ft_getcmd.c
 NAME    = minishell
 OBJS 	= ${SRCS:.c=.o}
 LBFT	= libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/04 16:59:15 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:19:21 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct t_cmd
 {
+    int     built;
     char    *cmd;
     char    **full_cmd;
     char    *path;
@@ -36,6 +37,7 @@ char	*ft_strdup(const char *s1);
 int     ft_chrafter(char *line, int i, int c);
 int     ft_chrafterr(char *line, int i);
 size_t  ft_strlen(const char *s);
+t_cmd    *ft_getcmd(char **full_cmd);
 
 #endif
  
