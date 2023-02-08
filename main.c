@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/04 23:26:29 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:57:40 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ int	ft_red_chr(char *line)
 	return (0);
 }
 
-int	ft_chrafter(char *line, int i, int c)
-{
-	int	k;
-
-	k = 0;
-	while (i >= 0)
-	{
-		if (line[i]  == c)
-			k++;
-		i--;
-	}
-	if (k % 2)
-		return (0);
-	return (1);
-}
-
 int	ft_chrq(char *line, int j, int i)
 {
 	while (i < j)
@@ -53,7 +37,7 @@ int	ft_chrq(char *line, int j, int i)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	ft_chrafterr(char *line, int j)
@@ -64,17 +48,21 @@ int	ft_chrafterr(char *line, int j)
 
 	count = 0;
 	i = ft_chrq(line, j, 0);
+	if ((line[i] != 34 && line[i] != 39) || i == -1)
+		return (1);
 	c = line[i];
 	while (i < j)
 	{
 		if (line[i] == c)
 			count++;
-		if ((count % 2) == 0)
+		i++;
+		if ((count % 2) == 0 && count != 0)
 		{
 			i = ft_chrq(line, j, i);
 			c = line[i];
+			if ((line[i] != 34 && line[i] != 39) || i == -1)
+				return (1);
 		}
-		i++;
 	}
 	if (count % 2)
 		return (0);
@@ -114,16 +102,16 @@ int	ft_check_error(char *line, char *l, int x)
 			return (ft_red_chr(&line[i + 1]));
 		else if (ft_chrafterr(l, x) && line[i] == '<')
 			return (ft_red_chr(&line[i + 1]));
-		else if (ft_chrafterr(l, x) && line[i] == '|')
+		if (ft_chrafterr(l, x) && line[i] == '|')
 			return (ft_red_chr(&line[i + 1]));
 		i++;
 	}
-	ft_chng_pipe(line);
 	return (0);
 }
 
 void	ft_parse(char *line)
 {
+	t_cmd	*cmd;
 	char	**full_cmd;
 	int	i;
 
@@ -137,19 +125,19 @@ void	ft_parse(char *line)
 				return ;
 		i++;
 	}
+	ft_chng_pipe(line);
 	full_cmd = ft_split(line, -1);
-	// if (full_cmd == NULL)
-	// {
-	// 	printf("parse error\n");
-	// 	return ;
-	// }
-	//ft_getcmd(line, full_cmd, cmd);
-	// i = 0;
-	// while (full_cmd[i])
-	// {
-	// 	printf("%s\n", full_cmd[i]);
-	// 	i++;
-	// }
+	if (full_cmd == NULL)
+		return ;
+	if (ft_check_quote(full_cmd))
+		return ;
+	ft_getcmd(full_cmd, cmd);
+	i = 0;
+	while (full_cmd[i])
+	{
+		printf("%s\n", full_cmd[i]);
+		i++;
+	}
 	free(full_cmd);
 }
 

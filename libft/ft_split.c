@@ -80,7 +80,6 @@ char	**ft_split(char *s, char c)
 	if (!s)
 		return (NULL);
 	words = count_words(s, c);
-	printf("word = %d\n", words);  ///?????
 	arr = malloc((words + 1) * sizeof(char *));
 	if (!arr)
 		return (NULL);

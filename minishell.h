@@ -27,7 +27,7 @@ typedef struct t_cmd
 }   t_cmd;
 
 char    **ft_split(char *s, char c);
-int     ft_check_quote(char *line);
+int     ft_check_quote(char **line);
 int     ft_count_c(char *line, int c);
 char	*ft_strchr(const char *s, int c);
 char    *ft_strchr(const char *s, int c);
@@ -38,3 +38,4 @@ int     ft_chrafterr(char *line, int i);
 size_t  ft_strlen(const char *s);
 
 #endif
+ 
