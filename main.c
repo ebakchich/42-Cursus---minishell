@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/09 03:53:09 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/09 08:05:07 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,12 @@ void	ft_parse(char *line, char **env)
 	if (ft_check_quote(full_cmd))
 		return ;
 	cmd = ft_getcmd(full_cmd, env);
-	i = 0;
-	while (full_cmd[i])
-	{
-		printf("%s\n", full_cmd[i]);
-		i++;
-	}
+	// i = 0;
+	// while (full_cmd[i])
+	// {
+	// 	printf("%s\n", full_cmd[i]);
+	// 	i++;
+	// }
 	free(full_cmd);
 }
 

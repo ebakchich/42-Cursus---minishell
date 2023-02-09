@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/09 03:53:23 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/09 08:08:06 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,120 @@
 
 int ft_dblen(char **full_cmd)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (full_cmd[i])
-        i++;
-    return (i);
+	i = 0;
+	while (full_cmd[i])
+		i++;
+	return (i);
 }
 
 void    ft_init_cmd(t_cmd *cmd, int x)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i < x)
-    {
-        cmd[i].cmd = NULL;
-        cmd[i].full_cmd = NULL;
-        cmd[i].path = NULL;
-        cmd[i].infile = NULL;
-        cmd[i].outfile = NULL;
-        cmd[i].del_her = NULL;
-        cmd[i].apend = NULL;
-        cmd[i].envp = NULL;
-        i++;
-    }
-}   
+	i = 0;
+	while (i < x)
+	{
+		cmd[i].cmd = NULL;
+		cmd[i].path = NULL;
+		cmd[i].infile = NULL;
+		cmd[i].outfile = NULL;
+		cmd[i].del_her = NULL;
+		cmd[i].apend = NULL;
+		cmd[i].envp = NULL;
+		i++;
+	}
+}
+
+int	ft_count_c(char *line)
+{
+	int	i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == '>' && line[i + 1] == '>')
+		{
+			i++;
+			count++;
+		}
+		else if (line[i] == '<' && line[i + 1] == '<')
+		{
+			i++;
+			count++;
+		}
+		else if (line[i] == '>')
+			count++;
+		else if (line[i] == '<')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+char    *ft_add_space(char *line)
+{
+	int		count;
+	char	*new;
+	int	i;
+	int	j;
+
+	count = ft_count_c(line);
+	if (count == 0)
+		return (line);
+	new = malloc((ft_strlen(line) + (count * 2) + 1) * sizeof(char));
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == '>' && line[i + 1] == '>')
+		{
+			new[j++] = ' ';
+			new[j++] = line[i++];
+			new[j++] = line[i++];
+			new[j++] = ' ';
+		}
+		else if (line[i] == '<' && line[i + 1] == '<')
+		{
+			new[j++] = ' ';
+			new[j++] = line[i++];
+			new[j++] = line[i++];
+			new[j++] = ' ';
+		}
+		else if (line[i] == '>' || line[i] == '<')
+		{
+			new[j++] = ' ';
+			new[j++] = line[i++];
+			new[j++] = ' ';
+		}
+		else
+			new[j++] = line[i++];
+	}
+	new[j] = '\0';
+	printf("%s\n", new);
+	free(line);
+	return (new);
+}
 
 t_cmd    *ft_getcmd(char **full_cmd, char **env)
 {
-    t_cmd	*cmd;
-    char    **token;
-    int     i;
+	t_cmd	*cmd;
+	char    **token;
+	int     i;
 
-    cmd = malloc(ft_dblen(full_cmd) * sizeof(t_cmd));
-    ft_init_cmd(cmd, ft_dblen(full_cmd));
-    i = 0;
-    while (full_cmd[i])
-    {
-        token = ft_split(full_cmd[i], ' ');
-        ft_parse_cmd(cmd, i, token, env);
-        free(token);
-    }
-    full_cmd[i] = NULL;
-    return (cmd);
+	cmd = malloc(ft_dblen(full_cmd) * sizeof(t_cmd));
+	ft_init_cmd(cmd, ft_dblen(full_cmd));
+	i = 0;
+	while (full_cmd[i])
+	{
+		token = ft_split(ft_add_space(full_cmd[i]), ' ');
+		ft_parse_cmd(cmd, i, token, env);
+		free(token);
+		i++;
+	}
+	full_cmd[i] = NULL;
+	return (cmd);
 }
