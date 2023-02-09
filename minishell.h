@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/08 11:19:21 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:50:19 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@
 # include <readline/readline.h>
 # include <stdlib.h>
 
+
+
 typedef struct t_cmd
 {
-    int     built;
     char    *cmd;
     char    **full_cmd;
     char    *path;
-    int     infile;
-	int     outfile;
+    int     **infile;
+	int     **outfile;
+    char    **del_her;
+    char    **apend;
     char    **envp;
 }   t_cmd;
 
@@ -37,7 +40,8 @@ char	*ft_strdup(const char *s1);
 int     ft_chrafter(char *line, int i, int c);
 int     ft_chrafterr(char *line, int i);
 size_t  ft_strlen(const char *s);
-t_cmd    *ft_getcmd(char **full_cmd);
+t_cmd    *ft_getcmd(char **full_cmd, char **env);
+void    ft_parse_cmd(t_cmd *cmd, int i, char **token, char **env);
 
 #endif
  

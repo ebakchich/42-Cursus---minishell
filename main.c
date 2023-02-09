@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/08 10:39:25 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/09 03:53:09 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_check_error(char *line, char *l, int x)
 	return (0);
 }
 
-void	ft_parse(char *line)
+void	ft_parse(char *line, char **env)
 {
 	t_cmd	*cmd;
 	char	**full_cmd;
@@ -131,7 +131,7 @@ void	ft_parse(char *line)
 		return ;
 	if (ft_check_quote(full_cmd))
 		return ;
-	cmd = ft_getcmd(full_cmd);
+	cmd = ft_getcmd(full_cmd, env);
 	i = 0;
 	while (full_cmd[i])
 	{
@@ -141,14 +141,14 @@ void	ft_parse(char *line)
 	free(full_cmd);
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	char	*line;
 
 	while (1)
 	{
 		line = readline("\033[32;1m\U000025B6\033[0m \033[32;1mminishell $>\033[0m ");
-		ft_parse(line);
+		ft_parse(line, env);
 		free(line);
 	}
 	return (0);
