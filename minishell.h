@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/11 07:56:17 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:45:42 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 
 # include <readline/readline.h>
 # include <stdlib.h>
+#include <fcntl.h>
 
 typedef struct t_cmd
 {
 	char	**cmd;
 	char	*path;
-	int		**infile;
-	int		**outfile;
-	char	*her;
-	int		**apend;
-	char	**envp;
+	int		*infile; //done
+	int		*outfile; //done
+	char	*her; //done
+	int		*apend; //done
+	char	**envp; //done
 }   t_cmd;
 
 char    **ft_split(char *s, char c);

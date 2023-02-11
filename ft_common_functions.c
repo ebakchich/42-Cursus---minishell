@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:13:54 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/10 17:10:21 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:01:44 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 int    ft_count_str(char **token, char *str)
 {
     int i;
+	int	len;
     int count;
 
     i = 0;
     count = 0;
+	len = ft_strlen(str);
     while (token[i])
     {
-        if (ft_memcmp(token[i], str, ft_strlen(str)) == 0)
+		if (len < ft_strlen(token[i]))
+			len = ft_strlen(token[i]);
+        if (ft_memcmp(token[i], str, len) == 0)
             count++;
+		len = ft_strlen(str);
         i++;
     }
     return (count);
