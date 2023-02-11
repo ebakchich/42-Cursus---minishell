@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/09 09:37:34 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/11 07:56:17 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,36 @@
 # include <readline/readline.h>
 # include <stdlib.h>
 
-
-
 typedef struct t_cmd
 {
-    char    **cmd;
-    char    *path;
-    char     **infile;
-	char     **outfile;
-    char    **del_her;
-    char    **apend;
-    char    **envp;
+	char	**cmd;
+	char	*path;
+	int		**infile;
+	int		**outfile;
+	char	*her;
+	int		**apend;
+	char	**envp;
 }   t_cmd;
 
 char    **ft_split(char *s, char c);
-int     ft_check_quote(char **line);
 char	*ft_strchr(const char *s, int c);
 char    *ft_strchr(const char *s, int c);
-int     ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strdup(const char *s1);
+int     ft_memcmp(const void *s1, const void *s2, size_t n);
+size_t  ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+
+int     ft_check_quote(char **line);
 int     ft_chrafter(char *line, int i, int c);
 int     ft_chrafterr(char *line, int i);
-size_t  ft_strlen(const char *s);
-t_cmd    *ft_getcmd(char **full_cmd, char **env);
-void    ft_parse_cmd(t_cmd *cmd, int i, char **token, char **env);
-int     ft_memcmp(const void *s1, const void *s2, size_t n);
+t_cmd   *ft_getcmd(char **full_cmd, char **env);
+void    ft_parse_cmd(t_cmd *cmd, char **token, char **env);
+void    ft_chng_c(char *line, char c);
+void    ft_check_her(t_cmd *cmd, char **token);
+
+int    ft_count_str(char **token, char *str);
+int	ft_chrafterr(char *line, int j);
+void	ft_chng_c(char *line, char c);
 
 #endif
  

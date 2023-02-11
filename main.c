@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/09 08:05:07 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:24:38 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,59 +27,6 @@ int	ft_red_chr(char *line)
 		return (-1);
 	}
 	return (0);
-}
-
-int	ft_chrq(char *line, int j, int i)
-{
-	while (i < j)
-	{
-		if (line[i] == 34 || line[i] == 39)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-int	ft_chrafterr(char *line, int j)
-{
-	int		i;
-	char	c;
-	int 	count;
-
-	count = 0;
-	i = ft_chrq(line, j, 0);
-	if ((line[i] != 34 && line[i] != 39) || i == -1)
-		return (1);
-	c = line[i];
-	while (i < j)
-	{
-		if (line[i] == c)
-			count++;
-		i++;
-		if ((count % 2) == 0 && count != 0)
-		{
-			i = ft_chrq(line, j, i);
-			c = line[i];
-			if ((line[i] != 34 && line[i] != 39) || i == -1)
-				return (1);
-		}
-	}
-	if (count % 2)
-		return (0);
-	return (1);
-}
-
-void	ft_chng_pipe(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (ft_chrafterr(line, i) && line[i] == '|')
-			line[i] = -1;
-		i++;
-	}
 }
 
 int	ft_check_error(char *line, char *l, int x)
@@ -125,7 +72,7 @@ void	ft_parse(char *line, char **env)
 				return ;
 		i++;
 	}
-	ft_chng_pipe(line);
+	ft_chng_c(line, '|');
 	full_cmd = ft_split(line, -1);
 	if (full_cmd == NULL)
 		return ;

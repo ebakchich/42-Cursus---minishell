@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/09 08:08:06 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:46:25 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    ft_init_cmd(t_cmd *cmd, int x)
 		cmd[i].path = NULL;
 		cmd[i].infile = NULL;
 		cmd[i].outfile = NULL;
-		cmd[i].del_her = NULL;
+		cmd[i].her = NULL;
 		cmd[i].apend = NULL;
 		cmd[i].envp = NULL;
 		i++;
@@ -107,7 +107,7 @@ char    *ft_add_space(char *line)
 			new[j++] = line[i++];
 	}
 	new[j] = '\0';
-	printf("%s\n", new);
+	ft_chng_c(new, ' ');
 	free(line);
 	return (new);
 }
@@ -123,8 +123,9 @@ t_cmd    *ft_getcmd(char **full_cmd, char **env)
 	i = 0;
 	while (full_cmd[i])
 	{
-		token = ft_split(ft_add_space(full_cmd[i]), ' ');
-		ft_parse_cmd(cmd, i, token, env);
+		ft_chng_c(full_cmd[i], ' ');
+		token = ft_split(ft_add_space(full_cmd[i]), -1);
+		ft_parse_cmd(&cmd[i], token, env);
 		free(token);
 		i++;
 	}
