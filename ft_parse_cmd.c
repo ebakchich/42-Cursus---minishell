@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/11 17:26:37 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/12 10:16:30 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,47 @@ void    ft_check_file(t_cmd *cmd, char **token)
 	}
 }
 
-void	ft_full_cmd(char **token, char **cmd)
+int	ft_if_red(char *token, char **dr)
 {
+	int	len;
 	int	i;
 
 	i = 0;
-	while (token[i])
+	while (dr[i])
 	{
+		len = ft_strlen(dr[i]);
+		if (len < ft_strlen(token))
+			len = ft_strlen(token);
+		if (ft_memcmp(token, dr[i], len) == 0)
+			return (1);
 		i++;
 	}
+	return (0);
+}
+
+void	ft_full_cmd(char **token, char **cmd, char **dr)
+{
+	int	i;
+	int	c;
+	int	l;
+
+	l = 0;
+	while (token[l])
+		l++;
+	i = 0;
+	c = 0;
+	while (i < l)
+	{
+		if (ft_if_red(token[i], dr))
+			i = i + 1;
+		else
+		{
+			cmd[c] = ft_strdup(token[i]);
+			c++;
+		}
+		i++;
+	}
+	cmd[c] = NULL;
 }
 
 void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
@@ -91,6 +123,15 @@ void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
 	if (l != 0)
 	{
 		cmd->cmd = malloc((l + 1) * sizeof(char *));
-		ft_full_cmd(token, cmd->cmd);
+		ft_full_cmd(token, cmd->cmd, dr);
+	}
+	i = 0;
+	if (cmd->cmd != NULL)
+	{
+		while (cmd->cmd[i])
+		{			
+			printf("%s\n", cmd->cmd[i]);
+			i++;
+		}
 	}
 }
