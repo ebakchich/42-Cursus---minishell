@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/12 10:16:30 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:12:44 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,13 @@ void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
 		cmd->cmd = malloc((l + 1) * sizeof(char *));
 		ft_full_cmd(token, cmd->cmd, dr);
 	}
-	i = 0;
-	if (cmd->cmd != NULL)
-	{
-		while (cmd->cmd[i])
-		{			
-			printf("%s\n", cmd->cmd[i]);
-			i++;
-		}
-	}
+	// i = 0;
+	// if (cmd->cmd != NULL)
+	// {
+	// 	while (cmd->cmd[i])
+	// 	{			
+	// 		printf("%s\n", cmd->cmd[i]);
+	// 		i++;
+	// 	}
+	// }
 }

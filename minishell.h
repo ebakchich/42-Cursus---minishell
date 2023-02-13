@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/11 13:45:42 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/13 04:20:35 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 
 typedef struct t_cmd
 {
-	char	**cmd;
-	char	*path;
+	char	**cmd; //done
 	int		*infile; //done
 	int		*outfile; //done
 	char	*her; //done
@@ -44,9 +43,11 @@ void    ft_parse_cmd(t_cmd *cmd, char **token, char **env);
 void    ft_chng_c(char *line, char c);
 void    ft_check_her(t_cmd *cmd, char **token);
 
-int    ft_count_str(char **token, char *str);
-int	ft_chrafterr(char *line, int j);
+int		ft_count_str(char **token, char *str);
+int		ft_chrafterr(char *line, int j);
 void	ft_chng_c(char *line, char c);
+int		ft_count_c(char *line, int c);
+void	ft_remove_c(char *line, int c);
 
 #endif
  

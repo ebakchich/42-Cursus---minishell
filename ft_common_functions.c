@@ -6,11 +6,27 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:13:54 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/11 16:01:44 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:21:32 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int ft_count_c(char *line, int c)
+{
+    int i;
+    int count;
+
+    count = 0;
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == c)
+            count++;
+        i++;
+    }
+    return (count);
+}
 
 int    ft_count_str(char **token, char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/11 13:45:32 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:51:47 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void    ft_init_cmd(t_cmd *cmd, int x, char **env)
 	while (i < x)
 	{
 		cmd[i].cmd = NULL;
-		cmd[i].path = NULL;
 		cmd[i].infile = NULL;
 		cmd[i].outfile = NULL;
 		cmd[i].her = NULL;
@@ -40,7 +39,7 @@ void    ft_init_cmd(t_cmd *cmd, int x, char **env)
 	}
 }
 
-int	ft_count_c(char *line)
+int	ft_count_red(char *line)
 {
 	int	i;
 	int count;
@@ -75,7 +74,7 @@ char    *ft_add_space(char *line)
 	int	i;
 	int	j;
 
-	count = ft_count_c(line);
+	count = ft_count_red(line);
 	if (count == 0)
 		return (line);
 	new = malloc((ft_strlen(line) + (count * 2) + 1) * sizeof(char));

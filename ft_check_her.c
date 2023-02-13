@@ -6,11 +6,25 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:37:21 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/11 08:06:09 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/13 04:48:16 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int    ft_ex_c(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == 34 || line[i] == 39)
+            return (line[i]);
+        i++;
+    }
+    return (-1);
+}
 
 char    **ft_ex_del(char **token, int l)
 {
@@ -37,23 +51,23 @@ char    **ft_ex_del(char **token, int l)
 void    ft_check_her(t_cmd *cmd, char **token)
 {
     char    *her;
-    char    *join;
     char    **del;
-    char    *sp;
+    int count;
     int l;
     int i;
     int j;
 
-    i = 0;
-    join = ft_strdup("");
-    sp = ft_strdup("|");
-    sp[0] = 10;
+    cmd->her = ft_strdup("");
     l = ft_count_str(token, "<<");
     if (l == 0)
         return ;
+    i = 0;
     del = ft_ex_del(token, l);
     while (i < l)
     {
+        count = ft_count_c(del[i], 34) + ft_count_c(del[i], 39);
+        ft_remove_c(del[i], ft_ex_c(del[i]));
+        printf("del = %s\n", del[i]);
         j = 1;
         while (j)
         {
@@ -62,12 +76,13 @@ void    ft_check_her(t_cmd *cmd, char **token)
                 j = 0;
             if (j != 0)
             {
-                join = ft_strjoin(join, her);
-                join = ft_strjoin(join, sp);
+                cmd->her = ft_strjoin(cmd->her, her);
+                cmd->her = ft_strjoin(cmd->her, "\n");
             }
         }
+        // if (count == 0 && ft_count_c(cmd->her, 36))
+        //     ft_expend(cmd->her);
         i++;
     }
-    join[ft_strlen(join) - 1] = '\0';
-    cmd->her = join;
+    cmd->her[ft_strlen(cmd->her) - 1] = '\0';
 }
