@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:37:21 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/13 04:48:16 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:43:53 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void    ft_check_her(t_cmd *cmd, char **token)
     {
         count = ft_count_c(del[i], 34) + ft_count_c(del[i], 39);
         ft_remove_c(del[i], ft_ex_c(del[i]));
-        printf("del = %s\n", del[i]);
         j = 1;
         while (j)
         {
@@ -80,9 +79,14 @@ void    ft_check_her(t_cmd *cmd, char **token)
                 cmd->her = ft_strjoin(cmd->her, "\n");
             }
         }
-        // if (count == 0 && ft_count_c(cmd->her, 36))
-        //     ft_expend(cmd->her);
+            if (count == 0 && ft_count_c(cmd->her, 36))
+            {
+                // printf("1 = %s\n", cmd->her);
+                cmd->her = ft_expend(cmd->her);
+                //printf("2 = %s\n", cmd->her);
+            }
         i++;
     }
-    cmd->her[ft_strlen(cmd->her) - 1] = '\0';
+    //cmd->her[ft_strlen(cmd->her) - 1] = '\0';
+    printf("%s\n", cmd->her);
 }
