@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/13 10:00:01 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/14 09:56:06 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*ft_strdup(const char *s1);
 int     ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t  ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 int     ft_check_quote(char **line);
 int     ft_chrafter(char *line, int i, int c);
