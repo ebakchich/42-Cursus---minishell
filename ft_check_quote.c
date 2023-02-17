@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:48:03 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 14:06:57 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:02:53 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,9 @@ char	*ft_remove_db(char *l)
 	while (l[i])
 	{
 		c = ft_ex_i(l + i);
-		//printf("c = %c\n", c);
 		if (l[i] == c)
 		{
 			ft_remove_c(l + i, c);
-			
-			//printf("l = %s\n", l);
 			c = ft_ex_i2(l, c);
 			i = c;
 			ft_remove_c(l + i, l[c]);

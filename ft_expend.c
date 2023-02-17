@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/16 17:53:50 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 22:08:19 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,18 @@ char	*ft_check_sp(char *l)
 	new = malloc((i + 1) * sizeof(char));
 	j = 0;
 	x = 0;
-	while (j < i)
+	while (j < i && l[j])
 	{
-		if (l[j] && ((l[j] > 96 && l[j] < 123) || (l[j] > 64 && l[j] < 90) || (l[j] > 47 && l[j] < 57) || (l[j] == '$')))
-		{	
-			while (l[j] && ((l[j] > 96 && l[j] < 123) || (l[j] > 64 && l[j] < 90) || (l[j] > 47 && l[j] < 57) || (l[j] == '$')))
-				new[x++] = l[j++];
-		}
+		if ((l[j] > 96 && l[j] < 123) || (l[j] > 64 && l[j] < 90) || (l[j] > 47 && l[j] < 57) || (l[j] == '$'))
+			new[x] = l[j];
 		else
 		{
-			new[x++] = -1;
-			new[x++] = l[j++];
-			new[x++] = -1;
+			new[x++] = 64;
+			new[x++] = l[j];
+			new[x] = 64;
 		}
+		x++;
+		j++;
 	}
 	new[x] = '\0';
 	return (new);

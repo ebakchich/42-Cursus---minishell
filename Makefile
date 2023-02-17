@@ -3,7 +3,7 @@ NAME    = minishell
 OBJS 	= ${SRCS:.c=.o}
 LBFT	= libft/libft.a
 CC		= cc
-GFLAGS  = -Wall -Wextra -Werror -lreadline #-fsanitize=address -g
+GFLAGS  = -Wall -Wextra -Werror -lreadline #-g -fsanitize=address 
 MAKEC	= make clean
 MAKEF	= make fclean
 MAKER	= make re

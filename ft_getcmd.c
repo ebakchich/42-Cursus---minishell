@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 14:16:04 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:57:35 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void    ft_init_cmd(t_cmd *cmd, int x, char **env)
 		cmd[i].outfile = NULL;
 		cmd[i].her = NULL;
 		cmd[i].apend = NULL;
-		cmd[i].envp = env;
 		i++;
 	}
 }
@@ -129,5 +128,16 @@ t_cmd    *ft_getcmd(char **full_cmd, char **env)
 		i++;
 	}
 	full_cmd[i] = NULL;
+	// i = 0;
+	// while(cmd->cmd[i])
+	// {
+	// 	printf("cmd : %s\n", cmd->cmd[i]);
+	// 	i++;
+	// }
+	// 	// printf("infile : %d\n", *cmd->infile);
+	// 	// printf("outfile : %d\n", *cmd->outfile);
+	// 	// printf("append : %d\n", *cmd->apend);
+	// 	printf("her : %s\n", cmd->her);
+	// 	printf("end\n");
 	return (cmd);
 }

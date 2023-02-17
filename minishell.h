@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 11:01:42 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:14:01 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <stdlib.h>
 #include <fcntl.h>
 
+typedef struct t_var
+{
+	int		status;
+	char	**env;
+}	t_var;
+
 typedef struct t_cmd
 {
 	char	**cmd; //done
@@ -24,7 +30,6 @@ typedef struct t_cmd
 	int		*outfile; //done
 	char	*her; //done
 	int		*apend; //done
-	char	**envp; //done
 }   t_cmd;
 
 char    **ft_split(char *s, char c);
