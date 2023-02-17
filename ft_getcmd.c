@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 22:09:40 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:01:43 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ t_cmd    *ft_getcmd(char **full_cmd, char **env)
 		ft_chng_c(full_cmd[i], ' ');
 		token = ft_split(ft_add_space(full_cmd[i]), -1);
 		ft_parse_cmd(&cmd[i], token, env);
-		free(token);
 		i++;
 	}
+	ft_free(NULL, token);
 	full_cmd[i] = NULL;
 	return (cmd);
 }

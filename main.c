@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 14:51:25 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:22:22 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,13 @@ void	ft_parse(char *line, char **env)
 	if (full_cmd == NULL)
 		return ;
 	if (ft_check_quote(full_cmd))
+	{
+		ft_free(NULL, full_cmd);
 		return ;
+	}
 	cmd = ft_getcmd(full_cmd, env);
-	free(full_cmd);
+	free(cmd);
+	ft_free(NULL, full_cmd);
 }
 
 int	main(int ac, char **av, char **env)

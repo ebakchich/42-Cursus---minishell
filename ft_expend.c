@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 22:08:19 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:39:14 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*add_befor_c(char *line, int c)
 		else
 			new[j++] = line[i++];
 	}
+	free(line);
 	new[j] = '\0';
 	return (new);
 }
@@ -125,7 +126,8 @@ char	*ft_check_n(char *line)
 			ex[i] = ft_get_env(ex[i]);
 		i++;
 	}
-	line = ft_join_all(ex);	
+	line = ft_join_all(ex);
+	ft_free(NULL, ex);
 	return (line);
 }
 
@@ -146,6 +148,7 @@ char	*ft_expend(char *line)
 			i++;
 		}
 		line = ft_join_all(s);
+		ft_free(NULL, s);
 	}
 	else if (ft_count_c(line, 10))
 		line = ft_check_n(line);

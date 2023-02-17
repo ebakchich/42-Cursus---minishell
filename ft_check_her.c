@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:37:21 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 22:10:06 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:29:05 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void    ft_check_her(t_cmd *cmd, char **token)
                 cmd->her = ft_strjoin(cmd->her, her);
                 cmd->her = ft_strjoin(cmd->her, "\n");
             }
+            free(her);
         }
             if (count == 0 && ft_count_c(cmd->her, 36))
                 cmd->her = ft_expend(cmd->her);

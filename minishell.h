@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 17:14:01 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 00:30:27 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char    *ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 int     ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t  ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 int     ft_check_quote(char **line);
@@ -52,6 +52,8 @@ char	*ft_expend(char *line);
 
 int    ft_ex_c(char *line);
 char	*ft_remove_db(char *l);
+
+void	ft_free(char *p, char **p2);
 
 int		ft_count_str(char **token, char *str);
 int		ft_chrafterr(char *line, int j);
