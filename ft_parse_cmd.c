@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 10:54:59 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:44:43 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,16 @@ int	ft_check_ambiguous(char *line)
 
 void    ft_get_fd(int *fd, char **token, char *str)
 {
-	int	j;
 	int i;
-	int d;
 	int f;
 
 	i = 0;
-	d = 0;
 	while (token[i])
 	{
 		if (ft_memcmp(token[i], str, ft_strlen(str)) == 0)
 		{
 			if (ft_check_ambiguous(ft_expend(token[i + 1])) && ft_ex_c(token[i + 1]) != 39)
-			{
 				printf("%s: ambiguous redirect\n", token[i + 1]);
-				fd[d] = -1;
-				d++;
-			}
 			else
 			{
 				if (ft_count_c(token[i + 1], 36) && ft_ex_c(token[i + 1]) != 39)
@@ -64,8 +57,7 @@ void    ft_get_fd(int *fd, char **token, char *str)
 				if (ft_count_c(token[i + 1], 34) || ft_count_c(token[i + 1], 39))
 					token[i + 1] = ft_remove_db(token[i + 1]);
 				f = open(token[i + 1], O_CREAT);
-				fd[d] = f;
-				d++;
+				fd = &f;
 			}
 		}
 		i++;
@@ -78,22 +70,13 @@ void    ft_check_file(t_cmd *cmd, char **token)
 
 	l = ft_count_str(token, "<");
 	if (l != 0)
-	{
-		cmd->infile = malloc(l * sizeof(int));
 		ft_get_fd(cmd->infile, token, "<");
-	}
 	l = ft_count_str(token, ">");
 	if (l != 0)
-	{
-		cmd->outfile = malloc(l * sizeof(int *));
 		ft_get_fd(cmd->outfile, token, ">");
-	}
 	l = ft_count_str(token, ">>");
 	if (l != 0)
-	{
-		cmd->apend = malloc(l * sizeof(int *));
 		ft_get_fd(cmd->apend, token, ">>");
-	}
 }
 
 int	ft_if_red(char *token, char **dr)
@@ -132,11 +115,21 @@ void	ft_full_cmd(char **token, char **cmd, char **dr)
 		else
 		{
 			cmd[c] = ft_strdup(token[i]);
+			if (ft_count_c(cmd[c], '$'))
+				cmd[c] = ft_expend(cmd[c]);
+			if (ft_count_c(cmd[c], 34) || ft_count_c(cmd[c], 39))
+				cmd[c] = ft_remove_db(cmd[c]);
 			c++;
 		}
 		i++;
 	}
 	cmd[c] = NULL;
+	i = 0;
+	while (cmd[i])
+	{
+		printf("%s\n", cmd[i]);
+		i++;
+	}
 }
 
 void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
