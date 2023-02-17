@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 11:44:43 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:41:22 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ void    ft_get_fd(int *fd, char **token, char *str)
 			else
 			{
 				if (ft_count_c(token[i + 1], 36) && ft_ex_c(token[i + 1]) != 39)
-				{
-					printf("%s\n", token[i + 1]);
 					token[i + 1] = ft_expend(token[i + 1]);
-					printf("%s\n", token[i + 1]);
-				}
 				if (ft_count_c(token[i + 1], 34) || ft_count_c(token[i + 1], 39))
 					token[i + 1] = ft_remove_db(token[i + 1]);
 				f = open(token[i + 1], O_CREAT);
