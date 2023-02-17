@@ -6,11 +6,39 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:48:03 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/13 06:18:40 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:56:14 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int    ft_ex_i(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == 34 || line[i] == 39)
+            return (i);
+        i++;
+    }
+    return (-1);
+}
+
+int    ft_ex_i2(char *line, int c)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] == c)
+            return (i);
+        i++;
+    }
+    return (-1);
+}
 
 void	ft_remove_c(char *line, int c)
 {
@@ -33,6 +61,27 @@ void	ft_remove_c(char *line, int c)
 		}
 		i++;
 	}
+}
+
+char	*ft_remove_db(char *l)
+{
+	int	k;
+	int	i;
+	int	c;
+
+	i = 0;
+	k = 0;
+	while (l[i])
+	{
+		c = ft_ex_i(l + i);
+		if (l[i] == l[c])
+		{
+			ft_remove_c(l + c, l[c]);
+			c = ft_ex_i2(l, c);
+			ft_remove_c(l + c, l[c]);
+		}
+	}
+	return (l);
 }
 
 int	ft_check_quote(char **full_cmd)

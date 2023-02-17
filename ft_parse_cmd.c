@@ -6,14 +6,37 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/13 02:12:44 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:54:59 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	ft_check_ambiguous(char *line)
+{
+	int	i;
+
+	if (ft_count_c(line, 36) == 0)
+		return (0);
+	i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (line[i] == '\0')
+		return (1);
+	while (line[i] && line[i] != ' ')
+		i++;
+	if (line[i] == '\0')
+		return (0);
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (line[i] != '\0')
+		return (1);
+	return (0);
+}
+
 void    ft_get_fd(int *fd, char **token, char *str)
 {
+	int	j;
 	int i;
 	int d;
 	int f;
@@ -24,9 +47,26 @@ void    ft_get_fd(int *fd, char **token, char *str)
 	{
 		if (ft_memcmp(token[i], str, ft_strlen(str)) == 0)
 		{
-			f = open(token[i + 1], O_CREAT);
-			fd[d] = f;
-			d++;
+			if (ft_check_ambiguous(ft_expend(token[i + 1])) && ft_ex_c(token[i + 1]) != 39)
+			{
+				printf("%s: ambiguous redirect\n", token[i + 1]);
+				fd[d] = -1;
+				d++;
+			}
+			else
+			{
+				if (ft_count_c(token[i + 1], 36) && ft_ex_c(token[i + 1]) != 39)
+				{
+					printf("%s\n", token[i + 1]);
+					token[i + 1] = ft_expend(token[i + 1]);
+					printf("%s\n", token[i + 1]);
+				}
+				if (ft_count_c(token[i + 1], 34) || ft_count_c(token[i + 1], 39))
+					token[i + 1] = ft_remove_db(token[i + 1]);
+				f = open(token[i + 1], O_CREAT);
+				fd[d] = f;
+				d++;
+			}
 		}
 		i++;
 	}
@@ -125,13 +165,4 @@ void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
 		cmd->cmd = malloc((l + 1) * sizeof(char *));
 		ft_full_cmd(token, cmd->cmd, dr);
 	}
-	// i = 0;
-	// if (cmd->cmd != NULL)
-	// {
-	// 	while (cmd->cmd[i])
-	// 	{			
-	// 		printf("%s\n", cmd->cmd[i]);
-	// 		i++;
-	// 	}
-	// }
 }
