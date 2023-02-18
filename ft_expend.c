@@ -6,18 +6,18 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 00:39:14 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 14:03:39 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_join_all(char **ex)
+char	*ft_join_all(char **ex) //done
 {
 	char	*line;
 	int		i;
 
-	line = ft_strdup("");
+	line = NULL;
 	i = 0;
 	while (ex[i])
 	{
@@ -27,7 +27,7 @@ char	*ft_join_all(char **ex)
 	return (line);
 }
 
-char	*add_befor_c(char *line, int c)
+char	*add_befor_c(char *line, int c) //done
 {
 	char	*new;
 	int	i;
@@ -52,7 +52,7 @@ char	*add_befor_c(char *line, int c)
 	return (new);
 }
 
-char	*ft_check_sp(char *l)
+char	*ft_check_sp(char *l) //done
 {
 	char	*new;
 	int	x;
@@ -83,18 +83,19 @@ char	*ft_check_sp(char *l)
 			new[x] = l[j];
 		else
 		{
-			new[x++] = 64;
+			new[x++] = -1;
 			new[x++] = l[j];
-			new[x] = 64;
+			new[x] = -1;
 		}
 		x++;
 		j++;
 	}
 	new[x] = '\0';
+	free(l);
 	return (new);
 }
 
-char	*ft_get_env(char *line)
+char	*ft_get_env(char *line) //done
 {
 	char	**ex;
 	int	i;
@@ -105,14 +106,18 @@ char	*ft_get_env(char *line)
 	while (ex[i])
 	{
 		if (ft_count_c(ex[i], '$'))
+		{
+			free(ex[i]);
 			ex[i] = getenv(ex[i] + 1);
+		}
 		i++;
 	}
 	line = ft_join_all(ex);
+	ft_free(NULL, ex);
 	return (line);
 }
 
-char	*ft_check_n(char *line)
+char	*ft_check_n(char *line) //done
 {
 	char	**ex;
 	int	i;
@@ -123,9 +128,13 @@ char	*ft_check_n(char *line)
 	while (ex[i])
 	{
 		if (ft_count_c(ex[i], 36))
+		{
+			free(ex[i]);	
 			ex[i] = ft_get_env(ex[i]);
+		}
 		i++;
 	}
+	free(line);
 	line = ft_join_all(ex);
 	ft_free(NULL, ex);
 	return (line);
@@ -148,7 +157,7 @@ char	*ft_expend(char *line)
 			i++;
 		}
 		line = ft_join_all(s);
-		ft_free(NULL, s);
+		ft_free(NULL, s);	
 	}
 	else if (ft_count_c(line, 10))
 		line = ft_check_n(line);
