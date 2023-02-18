@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 22:09:30 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:37:22 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	ft_full_cmd(char **token, char **cmd, char **dr)
 		i++;
 	}
 	cmd[c] = NULL;
-
 }
 
 void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
@@ -149,4 +148,5 @@ void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
 		cmd->cmd = malloc((l + 1) * sizeof(char *));
 		ft_full_cmd(token, cmd->cmd, dr);
 	}
+	
 }

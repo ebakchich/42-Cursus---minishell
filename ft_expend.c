@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 14:03:39 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:35:51 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_join_all(char **ex) //done
 	char	*line;
 	int		i;
 
-	line = NULL;
+	line = ft_strdup("");
 	i = 0;
 	while (ex[i])
 	{
