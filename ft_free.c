@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 22:13:31 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 00:26:21 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:40:35 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,27 @@ void	ft_free(char *p, char **p2)
 	if (p2 != NULL)
 	{
 		while (p2[i])
+		{
+			free(p2[i]);
 			i++;
-		if (i == 1)
-			free(p2);
-		else
-		{	
-			while (p2[i])
-			{
-				free(p2[i]);
-				i++;
-			}
-			free(p2);
 		}
+		free(p2);
 	}
 	if (p != NULL)
 		free(p);
+}
+
+void	ft_free_cmd(t_cmd *cmd)
+{
+	int	i;
+	int	num_pip;
+
+	num_pip = cmd[0].num_pip;
+	i = 0;
+	while (i < num_pip)
+	{
+		ft_free(cmd[i].her, cmd[i].cmd);
+		i++;
+	}
+	free(cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 17:37:22 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/20 22:31:34 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ft_check_ambiguous(char *line)
 
 void    ft_get_fd(int *fd, char **token, char *str)
 {
+	char	*ptr;
 	int i;
 	int f;
 
@@ -44,7 +45,9 @@ void    ft_get_fd(int *fd, char **token, char *str)
 	{
 		if (ft_memcmp(token[i], str, ft_strlen(str)) == 0)
 		{
-			if (ft_check_ambiguous(ft_expend(token[i + 1])) && ft_ex_c(token[i + 1]) != 39)
+			ptr = ft_strdup(token[i + 1]);
+			ptr = ft_expend(ptr);
+			if (ft_check_ambiguous(ptr) && ft_ex_c(token[i + 1]) != 39)
 				printf("%s: ambiguous redirect\n", token[i + 1]);
 			else
 			{
@@ -55,9 +58,11 @@ void    ft_get_fd(int *fd, char **token, char *str)
 				f = open(token[i + 1], O_CREAT);
 				fd = &f;
 			}
+			
 		}
 		i++;
 	}
+	free(ptr);
 }
 
 void    ft_check_file(t_cmd *cmd, char **token)
@@ -66,13 +71,13 @@ void    ft_check_file(t_cmd *cmd, char **token)
 
 	l = ft_count_str(token, "<");
 	if (l != 0)
-		ft_get_fd(cmd->infile, token, "<");
+		ft_get_fd(&cmd->infile, token, "<");
 	l = ft_count_str(token, ">");
 	if (l != 0)
-		ft_get_fd(cmd->outfile, token, ">");
+		ft_get_fd(&cmd->outfile, token, ">");
 	l = ft_count_str(token, ">>");
 	if (l != 0)
-		ft_get_fd(cmd->apend, token, ">>");
+		ft_get_fd(&cmd->apend, token, ">>");
 }
 
 int	ft_if_red(char *token, char **dr)
@@ -148,5 +153,5 @@ void    ft_parse_cmd(t_cmd *cmd, char **token, char **env)
 		cmd->cmd = malloc((l + 1) * sizeof(char *));
 		ft_full_cmd(token, cmd->cmd, dr);
 	}
-	
+	ft_free(NULL, dr);
 }

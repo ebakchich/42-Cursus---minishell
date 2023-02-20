@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 17:37:07 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/20 23:32:39 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ typedef struct t_var
 
 typedef struct t_cmd
 {
+	int		if_v;
+	int		num_pip;
 	char	**cmd; //done
-	int		*infile; //done
-	int		*outfile; //done
+	int		infile; //done
+	int		outfile; //done
 	char	*her; //done
-	int		*apend; //done
+	int		apend; //done
 }   t_cmd;
 
 char    **ft_split(char *s, char c);
@@ -54,6 +56,7 @@ int    ft_ex_c(char *line);
 char	*ft_remove_db(char *l);
 
 void	ft_free(char *p, char **p2);
+void	ft_free_cmd(t_cmd *cmd);
 
 int		ft_count_str(char **token, char *str);
 int		ft_chrafterr(char *line, int j);

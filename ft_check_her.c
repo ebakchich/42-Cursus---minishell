@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:37:21 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 17:36:25 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/20 22:19:49 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int    ft_ex_c(char *line)
 
 char    **ft_ex_del(char **token, int l)
 {
+    char    *tmp;
     char    **del;
     int i;
     int k;
@@ -70,7 +71,7 @@ void    ft_check_her(t_cmd *cmd, char **token)
         j = 1;
         while (j)
         {
-            her = readline("heredoc> ");
+            her = readline("> ");
             if (ft_memcmp(her, del[i], ft_strlen(her)) == 0)
                 j = 0;
             if (j != 0)
@@ -84,4 +85,5 @@ void    ft_check_her(t_cmd *cmd, char **token)
                 cmd->her = ft_expend(cmd->her);
         i++;
     }
+    ft_free(NULL, del);
 }

@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 16:17:30 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:18:41 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void    ft_init_cmd(t_cmd *cmd, int x, char **env)
 	i = 0;
 	while (i < x)
 	{
+		cmd[i].num_pip = x;
 		cmd[i].cmd = NULL;
-		cmd[i].infile = NULL;
-		cmd[i].outfile = NULL;
+		cmd[i].infile = -1;
+		cmd[i].outfile = -1;
 		cmd[i].her = NULL;
-		cmd[i].apend = NULL;
+		cmd[i].apend = -1;
 		i++;
 	}
 }
@@ -75,7 +76,10 @@ char    *ft_add_space(char *line)
 
 	count = ft_count_red(line);
 	if (count == 0)
-		return (line);
+	{
+		new = ft_strdup(line);
+		return (new);
+	}
 	new = malloc((ft_strlen(line) + (count * 2) + 1) * sizeof(char));
 	i = 0;
 	j = 0;
@@ -106,27 +110,28 @@ char    *ft_add_space(char *line)
 	}
 	new[j] = '\0';
 	ft_chng_c(new, ' ');
-	free(line);
 	return (new);
 }
 
 t_cmd    *ft_getcmd(char **full_cmd, char **env)
 {
+	char	*tmp;
 	t_cmd	*cmd;
 	char    **token;
 	int     i;
 
-	cmd = malloc(ft_dblen(full_cmd) * sizeof(t_cmd));
+	cmd = malloc(ft_dblen(full_cmd)  * sizeof(t_cmd));
 	ft_init_cmd(cmd, ft_dblen(full_cmd), env);
 	i = 0;
 	while (full_cmd[i])
 	{
 		ft_chng_c(full_cmd[i], ' ');
-		token = ft_split(ft_add_space(full_cmd[i]), -1);
+		tmp = ft_add_space(full_cmd[i]);
+		token = ft_split(tmp, -1);
+		free(tmp);
 		ft_parse_cmd(&cmd[i], token, env);
 		i++;
+		ft_free(NULL, token);
 	}
-	ft_free(NULL, token);
-	full_cmd[i] = NULL;
 	return (cmd);
 }

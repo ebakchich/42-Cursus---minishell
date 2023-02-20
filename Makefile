@@ -2,8 +2,8 @@ SRCS    = main.c ft_check_quote.c ft_getcmd.c ft_parse_cmd.c ft_common_functions
 NAME    = minishell
 OBJS 	= ${SRCS:.c=.o}
 LBFT	= libft/libft.a
-CC		= cc
-GFLAGS  = -Wall -Wextra -Werror -lreadline #-g -fsanitize=address 
+CC		= cc -g
+GFLAGS  = -Wall -Wextra -Werror -lreadline #-fsanitize=address 
 MAKEC	= make clean
 MAKEF	= make fclean
 MAKER	= make re

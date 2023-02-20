@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 17:35:51 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:55:19 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ char	*ft_get_env(char *line) //done
 {
 	char	**ex;
 	int	i;
+	char *tmp;
 
 	line = ft_check_sp(line);
 	ex = ft_split(line, -1);
@@ -107,11 +108,13 @@ char	*ft_get_env(char *line) //done
 	{
 		if (ft_count_c(ex[i], '$'))
 		{
-			free(ex[i]);
-			ex[i] = getenv(ex[i] + 1);
+			tmp = ex[i];
+			ex[i] = ft_strdup(getenv(ex[i] + 1));
+			free(tmp);
 		}
 		i++;
 	}
+	free(line);
 	line = ft_join_all(ex);
 	ft_free(NULL, ex);
 	return (line);
@@ -124,17 +127,14 @@ char	*ft_check_n(char *line) //done
 	
 	line = add_befor_c(line, 10);
 	ex = ft_split(line, -1);
+	free(line);
 	i = 0;
 	while (ex[i])
 	{
 		if (ft_count_c(ex[i], 36))
-		{
-			free(ex[i]);	
 			ex[i] = ft_get_env(ex[i]);
-		}
 		i++;
 	}
-	free(line);
 	line = ft_join_all(ex);
 	ft_free(NULL, ex);
 	return (line);
