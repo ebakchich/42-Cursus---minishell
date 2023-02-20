@@ -6,13 +6,13 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/20 22:17:33 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:20:13 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_red_chr(char *line)
+int	ft_red_chr(char *line, int x)
 {
 	int		i;
 	char	*c;
@@ -21,10 +21,21 @@ int	ft_red_chr(char *line)
 	i = 0;
 	while (line[i] == ' ')
 		i++;
-	if (line[i] == '<' || line[i] == '>' || line[i] == '|' || line[i] == '\0')
+	if (x == 0)
 	{
-		printf("gparse error near '%c'\n", line[i]);
-		return (-1);
+		if (line[i] == '|')
+		{
+			printf("gparse error near '%c'\n", line[i]);
+			return (-1);
+		}
+	}
+	else
+	{
+		if (line[i] == '<' || line[i] == '>' || line[i] == '|' || line[i] == '\0')
+		{
+			printf("gparse error near '%c'\n", line[i]);
+			return (-1);
+		}
 	}
 	return (0);
 }
@@ -42,15 +53,15 @@ int	ft_check_error(char *line, char *l, int x)
 	while(line[i])
 	{
 		if (ft_chrafterr(l, x) && line[i] == '<' && line[i + 1] == '<')
-			return (ft_red_chr(&line[i + 2]));
+			return (ft_red_chr(&line[i + 2], 1));
 		else if (ft_chrafterr(l, x) && line[i] == '>' && line[i + 1] == '>')
-			return (ft_red_chr(&line[i + 2]));
+			return (ft_red_chr(&line[i + 2], 1));
 		else if (ft_chrafterr(l, x) && line[i] == '>')
-			return (ft_red_chr(&line[i + 1]));
+			return (ft_red_chr(&line[i + 1], 1));
 		else if (ft_chrafterr(l, x) && line[i] == '<')
-			return (ft_red_chr(&line[i + 1]));
+			return (ft_red_chr(&line[i + 1], 1));
 		if (ft_chrafterr(l, x) && line[i] == '|')
-			return (ft_red_chr(&line[i + 1]));
+			return (ft_red_chr(&line[i + 1], 0));
 		i++;
 	}
 	return (0);

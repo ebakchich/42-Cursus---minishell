@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/20 22:31:34 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:27:29 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void    ft_get_fd(int *fd, char **token, char *str)
 				printf("%s: ambiguous redirect\n", token[i + 1]);
 			else
 			{
+				
 				if (ft_count_c(token[i + 1], 36) && ft_ex_c(token[i + 1]) != 39)
 					token[i + 1] = ft_expend(token[i + 1]);
 				if (ft_count_c(token[i + 1], 34) || ft_count_c(token[i + 1], 39))

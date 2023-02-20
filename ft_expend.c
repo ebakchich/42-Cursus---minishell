@@ -6,13 +6,13 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/20 13:55:19 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:28:48 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_join_all(char **ex) //done
+char	*ft_join_all(char **ex)
 {
 	char	*line;
 	int		i;
@@ -27,7 +27,7 @@ char	*ft_join_all(char **ex) //done
 	return (line);
 }
 
-char	*add_befor_c(char *line, int c) //done
+char	*add_befor_c(char *line, int c)
 {
 	char	*new;
 	int	i;
@@ -52,7 +52,7 @@ char	*add_befor_c(char *line, int c) //done
 	return (new);
 }
 
-char	*ft_check_sp(char *l) //done
+char	*ft_check_sp(char *l)
 {
 	char	*new;
 	int	x;
@@ -95,7 +95,28 @@ char	*ft_check_sp(char *l) //done
 	return (new);
 }
 
-char	*ft_get_env(char *line) //done
+char	*ft_get_env2(char *line)
+{
+	char	**ex;
+	char	*tmp;
+	int		i;
+
+	ex = ft_split(line, '$');
+	i = 0;
+	while (ex[i])
+	{
+		tmp = ex[i];
+		ex[i] = ft_strdup(getenv(ex[i]));
+		free(tmp);
+		i++;
+	}
+	free(line);
+	line = ft_join_all(ex);
+	ft_free(NULL, ex);
+	return (line);
+}
+
+char	*ft_get_env(char *line)
 {
 	char	**ex;
 	int	i;
@@ -107,11 +128,7 @@ char	*ft_get_env(char *line) //done
 	while (ex[i])
 	{
 		if (ft_count_c(ex[i], '$'))
-		{
-			tmp = ex[i];
-			ex[i] = ft_strdup(getenv(ex[i] + 1));
-			free(tmp);
-		}
+			ex[i] = ft_get_env2(ex[i]);
 		i++;
 	}
 	free(line);
@@ -120,7 +137,7 @@ char	*ft_get_env(char *line) //done
 	return (line);
 }
 
-char	*ft_check_n(char *line) //done
+char	*ft_check_n(char *line)
 {
 	char	**ex;
 	int	i;
