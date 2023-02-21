@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/21 00:28:48 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:40:36 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,12 @@ char	*ft_get_env2(char *line)
 	i = 0;
 	while (ex[i])
 	{
+		//printf("%s\n", getenv(ex[i]));
 		tmp = ex[i];
 		ex[i] = ft_strdup(getenv(ex[i]));
 		free(tmp);
 		i++;
+		//printf("b\n");
 	}
 	free(line);
 	line = ft_join_all(ex);
