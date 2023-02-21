@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/20 18:18:41 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:56:13 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void    ft_init_cmd(t_cmd *cmd, int x, char **env)
 	i = 0;
 	while (i < x)
 	{
+		cmd[i].if_v = 0;
 		cmd[i].num_pip = x;
 		cmd[i].cmd = NULL;
 		cmd[i].infile = -1;

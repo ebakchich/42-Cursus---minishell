@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/20 23:32:39 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:59:33 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <readline/readline.h>
 # include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
+# include <unistd.h>
 
 typedef struct t_var
 {
@@ -27,11 +28,11 @@ typedef struct t_cmd
 {
 	int		if_v;
 	int		num_pip;
-	char	**cmd; //done
-	int		infile; //done
-	int		outfile; //done
-	char	*her; //done
-	int		apend; //done
+	char	**cmd;
+	int		infile;
+	int		outfile;
+	char	*her;
+	int		apend;
 }   t_cmd;
 
 char    **ft_split(char *s, char c);
@@ -57,6 +58,8 @@ char	*ft_remove_db(char *l);
 
 void	ft_free(char *p, char **p2);
 void	ft_free_cmd(t_cmd *cmd);
+
+int ft_check_error_file(char *name, int j, int *if_v);
 
 int		ft_count_str(char **token, char *str);
 int		ft_chrafterr(char *line, int j);
