@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:15:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/24 03:50:22 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/24 04:32:42 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,12 @@ void	ft_get_fd2(t_cmd *cmd, char *t, int j)
 		t = ft_expend(t);
 	if (ft_count_c(t, 34) || ft_count_c(t, 39))
 		t = ft_remove_db(t);
-	if (ft_check_error_file(t, j, &cmd->if_v))
+	if (t[0] == '\0')
+	{
+		cmd->if_v = -1;
+		printf("no such file or directory:\n");
+	}
+	else if (ft_check_error_file(t, j, &cmd->if_v))
 	{
 		if (j == 1)
 			cmd->infile = open(t, O_RDONLY);
@@ -107,7 +112,10 @@ void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 			ptr = ft_strdup(t[i + 1]);
 			ptr = ft_expend(ptr);
 			if (ft_check_ambiguous(ptr) && ft_ex_c(t[i + 1]) != 39)
+			{
+				cmd->if_v = -1;
 				printf("%s: ambiguous redirect\n", t[i + 1]);
+			}			
 			else
 				ft_get_fd2(cmd, t[i + 1], j);
 		}
