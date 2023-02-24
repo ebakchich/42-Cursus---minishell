@@ -6,46 +6,47 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:13:54 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/18 17:36:50 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/24 02:33:05 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_count_c(char *line, int c)
+int	ft_count_c(char *line, int c)
 {
-    int i;
-    int count;
-    count = 0;
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] == c)
-            count++;
-        i++;
-    }
-    return (count);
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
 }
 
-int    ft_count_str(char **token, char *str)
+int	ft_count_str(char **token, char *str)
 {
-    int i;
+	int	i;
 	int	len;
-    int count;
+	int	count;
 
-    i = 0;
-    count = 0;
+	i = 0;
+	count = 0;
 	len = ft_strlen(str);
-    while (token[i])
-    {
+	while (token[i])
+	{
 		if (len < ft_strlen(token[i]))
 			len = ft_strlen(token[i]);
-        if (ft_memcmp(token[i], str, len) == 0)
-            count++;
+		if (ft_memcmp(token[i], str, len) == 0)
+			count++;
 		len = ft_strlen(str);
-        i++;
-    }
-    return (count);
+		i++;
+	}
+	return (count);
 }
 
 int	ft_chrq(char *line, int j, int i)
@@ -63,7 +64,7 @@ int	ft_chrafterr(char *line, int j)
 {
 	int		i;
 	char	c;
-	int 	count;
+	int		count;
 
 	count = 0;
 	i = ft_chrq(line, j, 0);

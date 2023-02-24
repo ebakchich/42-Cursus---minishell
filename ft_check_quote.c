@@ -6,38 +6,38 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:48:03 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/17 15:02:53 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/24 02:31:36 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int    ft_ex_i(char *line)
+int	ft_ex_i(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] == 34 || line[i] == 39)
-            return (line[i]);
-        i++;
-    }
-    return (-1);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 34 || line[i] == 39)
+			return (line[i]);
+		i++;
+	}
+	return (-1);
 }
 
-int    ft_ex_i2(char *line, int c)
+int	ft_ex_i2(char *line, int c)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] == c)
-            return (i);
-        i++;
-    }
-    return (-1);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 void	ft_remove_c(char *line, int c)

@@ -6,15 +6,15 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/21 17:56:13 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/24 03:07:26 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_dblen(char **full_cmd)
+int	ft_dblen(char **full_cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (full_cmd[i])
@@ -22,9 +22,9 @@ int ft_dblen(char **full_cmd)
 	return (i);
 }
 
-void    ft_init_cmd(t_cmd *cmd, int x, char **env)
+void	ft_init_cmd(t_cmd *cmd, int x, char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < x)
@@ -43,7 +43,7 @@ void    ft_init_cmd(t_cmd *cmd, int x, char **env)
 int	ft_count_red(char *line)
 {
 	int	i;
-	int count;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -68,32 +68,15 @@ int	ft_count_red(char *line)
 	return (count);
 }
 
-char    *ft_add_space(char *line)
+char	*ft_add_space(char *line, int i, int j, int count)
 {
-	int		count;
 	char	*new;
-	int	i;
-	int	j;
 
-	count = ft_count_red(line);
-	if (count == 0)
-	{
-		new = ft_strdup(line);
-		return (new);
-	}
 	new = malloc((ft_strlen(line) + (count * 2) + 1) * sizeof(char));
-	i = 0;
-	j = 0;
 	while (line[i])
 	{
-		if (line[i] == '>' && line[i + 1] == '>')
-		{
-			new[j++] = ' ';
-			new[j++] = line[i++];
-			new[j++] = line[i++];
-			new[j++] = ' ';
-		}
-		else if (line[i] == '<' && line[i + 1] == '<')
+		if ((line[i] == '>' && line[i + 1] == '>')
+			|| (line[i] == '<' && line[i + 1] == '<'))
 		{
 			new[j++] = ' ';
 			new[j++] = line[i++];
@@ -114,22 +97,28 @@ char    *ft_add_space(char *line)
 	return (new);
 }
 
-t_cmd    *ft_getcmd(char **full_cmd, char **env)
+t_cmd	*ft_getcmd(char **full_cmd, char **env)
 {
+	int		count;
 	char	*tmp;
 	t_cmd	*cmd;
-	char    **token;
-	int     i;
+	char	**token;
+	int		i;
 
-	cmd = malloc(ft_dblen(full_cmd)  * sizeof(t_cmd));
+	cmd = malloc(ft_dblen(full_cmd) * sizeof(t_cmd));
 	ft_init_cmd(cmd, ft_dblen(full_cmd), env);
 	i = 0;
 	while (full_cmd[i])
 	{
 		ft_chng_c(full_cmd[i], ' ');
-		tmp = ft_add_space(full_cmd[i]);
+		count = ft_count_red(full_cmd[i]);
+		if (count != 0)
+			tmp = ft_add_space(full_cmd[i], 0, 0, count);
+		else
+			tmp = full_cmd[i];
 		token = ft_split(tmp, -1);
-		free(tmp);
+		if (count != 0)
+			free(tmp);
 		ft_parse_cmd(&cmd[i], token, env);
 		i++;
 		ft_free(NULL, token);

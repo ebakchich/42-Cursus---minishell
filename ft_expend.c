@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/21 00:40:36 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/24 02:42:39 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,74 +27,6 @@ char	*ft_join_all(char **ex)
 	return (line);
 }
 
-char	*add_befor_c(char *line, int c)
-{
-	char	*new;
-	int	i;
-	int	j;
-
-	new = malloc((ft_strlen(line) + (ft_count_c(line, c) * 2) + 1) * sizeof(char));
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		if (line[i] == c)
-		{
-			new[j++] = -1;
-			new[j++] = line[i++];
-			new[j++] = -1;
-		}
-		else
-			new[j++] = line[i++];
-	}
-	free(line);
-	new[j] = '\0';
-	return (new);
-}
-
-char	*ft_check_sp(char *l)
-{
-	char	*new;
-	int	x;
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (1)
-	{	
-		while (l[j] && l[j] != '$')
-		{
-			j++;
-			i++;
-		}
-		while (l[j] && ((l[j] > 96 && l[j] < 123) || (l[j] > 64 && l[j] < 90) || (l[j] > 47 && l[j] < 57) || (l[j] == '$')))
-			j++;
-		if (l[j] == '\0')
-			break ;
-	}
-	i = (i * 2) + ft_strlen(l);
-	new = malloc((i + 1) * sizeof(char));
-	j = 0;
-	x = 0;
-	while (j < i && l[j])
-	{
-		if ((l[j] > 96 && l[j] < 123) || (l[j] > 64 && l[j] < 90) || (l[j] > 47 && l[j] < 57) || (l[j] == '$'))
-			new[x] = l[j];
-		else
-		{
-			new[x++] = -1;
-			new[x++] = l[j];
-			new[x] = -1;
-		}
-		x++;
-		j++;
-	}
-	new[x] = '\0';
-	free(l);
-	return (new);
-}
-
 char	*ft_get_env2(char *line)
 {
 	char	**ex;
@@ -105,12 +37,10 @@ char	*ft_get_env2(char *line)
 	i = 0;
 	while (ex[i])
 	{
-		//printf("%s\n", getenv(ex[i]));
 		tmp = ex[i];
 		ex[i] = ft_strdup(getenv(ex[i]));
 		free(tmp);
 		i++;
-		//printf("b\n");
 	}
 	free(line);
 	line = ft_join_all(ex);
@@ -121,8 +51,8 @@ char	*ft_get_env2(char *line)
 char	*ft_get_env(char *line)
 {
 	char	**ex;
-	int	i;
-	char *tmp;
+	int		i;
+	char	*tmp;
 
 	line = ft_check_sp(line);
 	ex = ft_split(line, -1);
@@ -142,8 +72,8 @@ char	*ft_get_env(char *line)
 char	*ft_check_n(char *line)
 {
 	char	**ex;
-	int	i;
-	
+	int		i;
+
 	line = add_befor_c(line, 10);
 	ex = ft_split(line, -1);
 	free(line);
@@ -176,11 +106,11 @@ char	*ft_expend(char *line)
 			i++;
 		}
 		line = ft_join_all(s);
-		ft_free(NULL, s);	
+		ft_free(NULL, s);
 	}
 	else if (ft_count_c(line, 10))
 		line = ft_check_n(line);
-	else
+	else if (ft_count_c(line, 36))
 		line = ft_get_env(line);
 	return (line);
 }

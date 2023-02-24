@@ -6,34 +6,34 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/21 14:36:46 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/24 04:00:21 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_red_chr(char *line, int x)
+int	ft_red_chr(char *l, int x)
 {
 	int		i;
 	char	*c;
 
 	c = "\n";
 	i = 0;
-	while (line[i] == ' ')
+	while (l[i] == ' ')
 		i++;
 	if (x == 0)
 	{
-		if (line[i] == '|')
+		if (l[i] == '|')
 		{
-			printf("gparse error near '%c'\n", line[i]);
+			printf("parse error near '%c'\n", l[i]);
 			return (-1);
 		}
 	}
 	else
 	{
-		if (line[i] == '<' || line[i] == '>' || line[i] == '|' || line[i] == '\0')
+		if (l[i] == '<' || l[i] == '>' || l[i] == '|' || l[i] == '\0')
 		{
-			printf("gparse error near '%c'\n", line[i]);
+			printf("gparse error near '%c'\n", l[i]);
 			return (-1);
 		}
 	}
@@ -50,7 +50,7 @@ int	ft_check_error(char *line, char *l, int x)
 		printf("parse error near '%c'\n", line[i]);
 		return (-1);
 	}
-	while(line[i])
+	while (line[i])
 	{
 		if (ft_chrafterr(l, x) && line[i] == '<' && line[i + 1] == '<')
 			return (ft_red_chr(&line[i + 2], 1));
@@ -71,10 +71,8 @@ void	ft_parse(char *line, char **env)
 {
 	t_cmd	*cmd;
 	char	**full_cmd;
-	int	i;
+	int		i;
 
-	if (line[0] == '\0')
-		return ;
 	i = 0;
 	while (line[i])
 	{
@@ -101,12 +99,18 @@ int	main(int ac, char **av, char **env)
 {
 	char	*line;
 
+	g_ex.exit_status = 0;
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		line = readline("\033[32;1m\U000025B6\033[0m \033[32;1mminishell $>\033[0m ");
-		// if (line[0])
-		// 	add_history(line);
-		ft_parse(line, env);
+		line = readline("\033[32;1m\U000025B6\033[0m \033[32;1mbash $\033[0m ");
+		if (line == NULL)
+			exit (g_ex.exit_status);
+		if (line[0] && line != NULL)
+			add_history(line);
+		if (line[0] != '\0')
+			ft_parse(line, env);
 		free(line);
 	}
 	return (0);
