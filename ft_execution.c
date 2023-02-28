@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 05:21:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 07:14:59 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 08:05:32 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_check_exit(t_cmd *cmd)
 
 void	ft_execution(t_cmd *cmd, char **env)
 {
-	if (ft_memcmp(cmd[0].cmd[0], "exit", 4) == 0 && cmd[0].num_pip == 1)
-		ft_check_exit(cmd);
+	if (cmd[0].cmd != NULL)
+		if (ft_memcmp(cmd[0].cmd[0], "exit", 4) == 0 && cmd[0].num_pip == 1)
+			ft_check_exit(cmd);
 }

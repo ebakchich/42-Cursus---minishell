@@ -6,7 +6,7 @@
 #    By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 02:43:28 by ebakchic          #+#    #+#              #
-#    Updated: 2023/02/28 07:16:26 by ebakchic         ###   ########.fr        #
+#    Updated: 2023/02/28 07:44:39 by ebakchic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME    = minishell
 OBJS 	= ${SRCS:.c=.o}
 LBFT	= libft/libft.a
 CC		= cc -g
-GFLAGS  = -Wall -Wextra -Werror -lreadline -L /Users/ebakchic/homebrew/Cellar/readline/8.2.1/lib -I /Users/ebakchic/homebrew/Cellar/readline/8.2.1/include -fsanitize=address 
+GFLAGS  = -Wall -Wextra -Werror -lreadline -L /Users/ebakchic/homebrew/Cellar/readline/8.2.1/lib -I /Users/ebakchic/homebrew/Cellar/readline/8.2.1/include #-fsanitize=address 
 MAKEC	= make clean
 MAKEF	= make fclean
 MAKER	= make re
