@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:48:03 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/24 02:31:36 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 05:14:41 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,65 +26,75 @@ int	ft_ex_i(char *line)
 	return (-1);
 }
 
-int	ft_ex_i2(char *line, int c)
+char	*ft_remove_c2(char *line, int c)
 {
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == c)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-void	ft_remove_c(char *line, int c)
-{
-	int	i;
-	int	j;
+	char	*new;
+	int		i;
+	int		j;
 
 	if (ft_count_c(line, c) == 0)
-		return ;
+		return (line);
+	new = malloc((ft_strlen(line) - ft_count_c(line, c) + 1) * sizeof(char));
 	i = 0;
+	j = 0;
 	while (line[i])
 	{
-		if (line[i] == c)
-		{
-			j = i;
-			while (line[j])
-			{
-				line[j] = line[j + 1];
-				j++;
-			}
-		}
+		if (line[i] != c)
+			new[j++] = line[i];
 		i++;
 	}
+	new[j] = '\0';
+	free(line);
+	return (new);
 }
 
-char	*ft_remove_db(char *l)
+char	*ft_remove_db(char *l, int x)
 {
-	int	k;
-	int	i;
-	int	c;
+	char	*new;
+	int		ch;
+	int		i;
+	int		c;
+	int		len;
 
 	i = 0;
-	k = 0;
+	c = ft_ex_i(l);
+	len = 0;
+	ch = 0;
 	while (l[i])
 	{
-		c = ft_ex_i(l + i);
-		if (l[i] == c)
+		if (l[i] != c)
+			len++;
+		if (c == l[i])
+			ch++;
+		i++;
+		if (ch % 2 == 0 && ch != 0)
 		{
-			ft_remove_c(l + i, c);
-			c = ft_ex_i2(l, c);
-			i = c;
-			ft_remove_c(l + i, l[c]);
+			ch = 0;
+			c = ft_ex_i(l + i);
 		}
-		else
-			i++;
 	}
-	return (l);
+	new = malloc((len + 1) * sizeof(char));
+	i = 0;
+	c = ft_ex_i(l);
+	len = 0;
+	ch = 0;
+	while (l[i])
+	{
+		if (l[i] != c)
+			new[len++] = l[i];
+		if (c == l[i])
+			ch++;
+		i++;
+		if (ch % 2 == 0 && ch != 0)
+		{
+			ch = 0;
+			c = ft_ex_i(l + i);
+		}
+	}
+	new[len] = '\0';
+	if (x == 1)
+		free(l);
+	return (new);
 }
 
 int	ft_check_quote(char **full_cmd)

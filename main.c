@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/24 04:00:21 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/27 03:37:34 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_red_chr(char *l, int x)
 	{
 		if (l[i] == '<' || l[i] == '>' || l[i] == '|' || l[i] == '\0')
 		{
-			printf("gparse error near '%c'\n", l[i]);
+			printf("parse error near '%c'\n", l[i]);
 			return (-1);
 		}
 	}
@@ -91,6 +91,7 @@ void	ft_parse(char *line, char **env)
 		return ;
 	}
 	cmd = ft_getcmd(full_cmd, env);
+	ft_execution(cmd, env);
 	ft_free_cmd(cmd);
 	ft_free(NULL, full_cmd);
 }
@@ -104,7 +105,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		line = readline("\033[32;1m\U000025B6\033[0m \033[32;1mbash $\033[0m ");
+		line = readline("\033[32;1m\U000025B6\033[0m \033[32;1mminishell $\033[0m ");
 		if (line == NULL)
 			exit (g_ex.exit_status);
 		if (line[0] && line != NULL)

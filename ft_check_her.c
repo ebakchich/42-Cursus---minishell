@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:37:21 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/24 02:30:15 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 05:22:54 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,29 @@ char	**ft_ex_del(char **token, int l)
 	return (del);
 }
 
-void	ft_check_her2(t_cmd *cmd, char *del)
+void	ft_check_her2(t_cmd *cmd, char *del, int j, int len)
 {
 	char	*her;
-	int		j;
 
-	j = 1;
+	signal(SIGINT, signal_handler);
 	while (j)
 	{
 		her = readline("> ");
-		if (ft_memcmp(her, del, ft_strlen(her)) == 0)
+		if (her == NULL)
 			j = 0;
-		if (j != 0)
+		else
 		{
-			cmd->her = ft_strjoin(cmd->her, her);
-			cmd->her = ft_strjoin(cmd->her, "\n");
+			len = ft_strlen(del);
+			if (len < ft_strlen(her))
+				len = ft_strlen(her);
+			if (ft_memcmp(her, del, len) == 0
+				|| (ft_strlen(del) == 0 && ft_strlen(her) == 0))
+				j = 0;
+			if (j != 0)
+			{
+				cmd->her = ft_strjoin(cmd->her, her);
+				cmd->her = ft_strjoin(cmd->her, "\n");
+			}
 		}
 		free(her);
 	}
@@ -84,12 +92,12 @@ void	ft_check_her(t_cmd *cmd, char **token, int i)
 	while (i < l)
 	{
 		count = ft_count_c(del[i], 34) + ft_count_c(del[i], 39);
-		ft_remove_c(del[i], ft_ex_c(del[i]));
-		ft_check_her2(cmd, del[i]);
+		del[i] = ft_remove_c2(del[i], ft_ex_c(del[i]));
+		del[i] = ft_remove_c2(del[i], ' ');
+		ft_check_her2(cmd, del[i], 1, 0);
 		if (count == 0 && ft_count_c(cmd->her, 36))
 			cmd->her = ft_expend(cmd->her);
 		i++;
 	}
 	ft_free(NULL, del);
-	printf("%s\n", cmd->her);
 }

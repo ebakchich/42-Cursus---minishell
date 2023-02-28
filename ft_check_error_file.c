@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:15:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/24 04:32:42 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 05:20:07 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	ft_check_error_file(char *name, int j, int *if_v)
 		if (access(name, F_OK) == -1)
 		{
 			if_v = &v;
-			write(2, "Error: No such file or directory\n", 33);
+			write(2, "Error: No such file or directory", 32);
+			printf("%s\n", name);
 			return (0);
 		}
 		if (access(name, R_OK) == -1)
@@ -74,12 +75,12 @@ int	ft_check_ambiguous(char *line)
 	return (0);
 }
 
-void	ft_get_fd2(t_cmd *cmd, char *t, int j)
+char	*ft_get_fd2(t_cmd *cmd, char *t, int j)
 {
 	if (ft_count_c(t, 36) && ft_ex_c(t) != 39)
 		t = ft_expend(t);
 	if (ft_count_c(t, 34) || ft_count_c(t, 39))
-		t = ft_remove_db(t);
+		t = ft_remove_db(t, 0);
 	if (t[0] == '\0')
 	{
 		cmd->if_v = -1;
@@ -96,18 +97,22 @@ void	ft_get_fd2(t_cmd *cmd, char *t, int j)
 			cmd->apend = open(t, O_CREAT
 					| O_WRONLY | O_APPEND, 0644);
 	}
+	return (t);
 }
 
 void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 {
 	char	*ptr;
+	int		len;
 	int		i;
-	int		f;
 
+	len = ft_strlen(str);
 	i = 0;
 	while (t[i])
 	{
-		if (ft_memcmp(t[i], str, ft_strlen(str)) == 0)
+		if (len < ft_strlen(t[i]))
+			len = ft_strlen(t[i]);
+		if (ft_memcmp(t[i], str, len) == 0)
 		{
 			ptr = ft_strdup(t[i + 1]);
 			ptr = ft_expend(ptr);
@@ -117,7 +122,7 @@ void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 				printf("%s: ambiguous redirect\n", t[i + 1]);
 			}			
 			else
-				ft_get_fd2(cmd, t[i + 1], j);
+				t[i + 1] = ft_get_fd2(cmd, t[i + 1], j);
 		}
 		i++;
 	}

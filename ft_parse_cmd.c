@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/24 03:54:52 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 05:15:21 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	ft_if_red(char *token, char **dr)
 
 void	ft_full_cmd(char **token, char **cmd, char **dr)
 {
-	int	i;
-	int	c;
-	int	l;
+	int		i;
+	int		c;
+	int		l;
 
 	l = 0;
 	while (token[l])
@@ -66,7 +66,7 @@ void	ft_full_cmd(char **token, char **cmd, char **dr)
 			if (ft_count_c(cmd[c], '$'))
 				cmd[c] = ft_expend(cmd[c]);
 			if (ft_count_c(cmd[c], 34) || ft_count_c(cmd[c], 39))
-				cmd[c] = ft_remove_db(cmd[c]);
+				cmd[c] = ft_remove_db(cmd[c], 1);
 			c++;
 		}
 		i++;
