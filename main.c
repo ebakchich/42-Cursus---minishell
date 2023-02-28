@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 08:05:50 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:58:17 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_check_error(char *line, char *l, int x)
 	return (0);
 }
 
-void	ft_parse(char *line, char **env)
+void	ft_parse(char *line, t_var *var)
 {
 	t_cmd	*cmd;
 	char	**full_cmd;
@@ -90,8 +90,8 @@ void	ft_parse(char *line, char **env)
 		ft_free(NULL, full_cmd);
 		return ;
 	}
-	cmd = ft_getcmd(full_cmd, env);
-	ft_execution(cmd, env);
+	cmd = ft_getcmd(full_cmd, var->env);
+	ft_exec(var, cmd);
 	ft_free_cmd(cmd);
 	ft_free(NULL, full_cmd);
 }
@@ -99,7 +99,15 @@ void	ft_parse(char *line, char **env)
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
+	t_var	*var;
 
+	var = malloc(sizeof(t_var));
+	var->env = dup_matrix(env);
+	if (!var->env)
+	{
+		perror("minishell");
+		return (1);
+	}
 	g_ex.exit_status = 0;
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
@@ -111,8 +119,9 @@ int	main(int ac, char **av, char **env)
 		if (line[0] && line != NULL)
 			add_history(line);
 		if (line[0] != '\0')
-			ft_parse(line, env);
+			ft_parse(line, var);
 		free(line);
+		// system("leaks minishell");
 	}
 	return (0);
 }

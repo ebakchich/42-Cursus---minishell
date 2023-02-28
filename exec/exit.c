@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execution.c                                     :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 05:21:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 08:05:32 by ebakchic         ###   ########.fr       */
+/*   Created: 2023/02/27 18:46:29 by yoyahya           #+#    #+#             */
+/*   Updated: 2023/02/28 09:13:15 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_error(char **cmd)
 {
@@ -51,7 +51,7 @@ void	ft_error2(char **cmd)
 	exit ((-256 + ft_atoi(cmd[1])) + 256);
 }
 
-void	ft_check_exit(t_cmd *cmd)
+void	ft_exit(t_cmd *cmd)
 {
 	int	i;
 
@@ -64,11 +64,4 @@ void	ft_check_exit(t_cmd *cmd)
 	if (i == 2)
 		ft_error2(cmd[0].cmd);
 	printf("too many arguments\n");
-}
-
-void	ft_execution(t_cmd *cmd, char **env)
-{
-	if (cmd[0].cmd != NULL)
-		if (ft_memcmp(cmd[0].cmd[0], "exit", 4) == 0 && cmd[0].num_pip == 1)
-			ft_check_exit(cmd);
 }
