@@ -3,22 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 06:48:06 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:29:05 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "libft/libft.h"
+#include <sys/types.h>
+#include <sys/errno.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <limits.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <signal.h>
+#include <fcntl.h>
+# include <sys/wait.h>
+
+typedef struct s_var
+{
+	char **env;
+}t_var;
 
 typedef struct s_gl_data
 {
@@ -72,7 +82,6 @@ void	rl_replace_line(const char *text, int clear_undo);
 void	signal_handler(int signum);
 void	signal_handler_her(int signum);
 void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j);
-void	ft_execution(t_cmd *cmd, char **env);
 
 t_cmd	*ft_getcmd(char **full_cmd, char **env);
 
@@ -82,4 +91,54 @@ char	*ft_remove_c2(char *line, int c);
 
 char	*get_next_line(int fd);
 
+
+
+////////////// exec //////////
+
+int		update(t_var **data, char *old);
+int		sel_builtin(t_cmd *cmd, t_var *data);
+char	*ft_strjoin1(char *s1, char *s2);
+int 	findenv(t_var *data, char *var, int *i);
+int 	is_valid(char *str);
+char 	**remenv(char **env, int pos, int len);
+int		unset(t_var *data, char **cmd);
+int 	ft_pwd(void);
+int 	is_builtin(char *cmd);
+int 	valexp(char **env, char *var, int *flag);
+int		repenv(t_var *data, char *var, int pos);
+int		appenv(t_var **data, char *var);
+int		ft_export(t_var *var, char **cmd);
+int 	env(char **env);
+int 	countn(char *str);
+int 	echo(char **str);
+int 	check_old(char **env);
+char 	**free_matrix(char **str);
+int 	len_matrix(char **arr);
+int		unset_err(char *str, int flag);
+int 	cd_err(char *str, int flag);
+char 	**dup_matrix(char **env);
+int 	export_err(char *str, int flag);
+int 	err_alloc(char *str);
+int 	ft_exec(t_var *var, t_cmd *cmd);
+void	rid(t_cmd data);
+int		builtin(t_cmd *cmd, t_var *var, int fork);
+int 	cd(char **cmd, t_var *data);
+int 	cd_1(char **cmd, t_var *data);
+void 	ft_exit(t_cmd *cmd);
+char 	*get_path(t_var *var, t_cmd *cmd);
+int 	exec_cmd(t_cmd *cmd, t_var *var);
+int 	sin_cmd(t_var *data, t_cmd *cmd);
+void 	rid(t_cmd data);
+int 	mult_cmd(t_cmd *cmd, t_var *var, int pip_in, int i);
+int		printenv(char **env);
+int		joinenv(t_var **var, char *cmd);
+char	*get_name(char *str);
+char	*get_val(char *str, int flag);
+char	*delchar(char *cmd, char c);
+int		updpwd(t_var *data);
+char	*ft_strjoin_3(char *s1, char *s2);
+int		check_acc(char *command, char **path);
+int		joinenv3(t_var **var, char *vale, char *val, int pos);
+int		joinenv2(t_var **var, char *cmd, char *val, int pos);
+int		ft_export2(t_var *var, char *cmd, int flag);
 #endif
