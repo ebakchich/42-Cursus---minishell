@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 03:32:57 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 07:17:18 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	*ft_get_env(char *line)
 	{
 		if (ft_count_c(ex[i], '$'))
 			ex[i] = ft_get_env2(ex[i]);
-			// ex[i] = ft_get_env3(ex[i]);
 		i++;
 	}
 	free(line);

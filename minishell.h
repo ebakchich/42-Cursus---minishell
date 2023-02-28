@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 05:15:31 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/02/28 06:48:06 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		ft_check_error_file(char *name, int j, int *if_v);
 int		ft_count_str(char **token, char *str);
 int		ft_chrafterr(char *line, int j);
 int		ft_count_c(char *line, int c);
+int		ft_atoi(const char *str);
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
