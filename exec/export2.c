@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:07:12 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 16:02:08 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/01 13:38:05 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 int	joinenv3(t_var **var, char *vale, char *val, int pos)
 {
+	char	*tmp;
+
+	tmp = ft_strdup(delchar(val, '='));
 	vale = ft_strdup((*var)->env[pos]);
-	val = ft_strjoin(vale, delchar(val, '='));
+	free(val);
+	val = ft_strjoin(vale, tmp);
 	free((*var)->env[pos]);
-	(*var)->env[pos] = val;
+	(*var)->env[pos] = ft_strdup(val);
+	free(val);
+	free(tmp);
 	return (0);
 }
 

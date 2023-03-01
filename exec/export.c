@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:07:12 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 15:52:52 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/01 13:37:53 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ int	joinenv(t_var **var, char *cmd)
 {
 	int		pos;
 	char	*val;
-	char	*tmp;
-	char	*namee;
-	char	*vale;
 
 	pos = 0;
 	val = get_val(cmd, 1);
@@ -28,9 +25,12 @@ int	joinenv(t_var **var, char *cmd)
 		return (1);
 	}
 	if (findenv(*var, cmd, &pos) == 0)
-		return (joinenv2(var, cmd, val, pos));
+		joinenv2(var, cmd, val, pos);
 	else
-		return (appenv(var, ft_strdup(delchar(cmd, '+'))));
+	{
+		free(val);
+		appenv(var, ft_strdup(delchar(cmd, '+')));
+	}
 	return (0);
 }
 
@@ -49,8 +49,7 @@ int	repenv(t_var *data, char *var, int pos)
 	{
 		if (pos == i)
 		{
-			nenv[i] = ft_strdup(var);
-			i++;
+			nenv[i++] = ft_strdup(var);
 			j++;
 		}
 		nenv[i] = ft_strdup(data->env[j]);
