@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 14:15:15 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/01 13:38:44 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,38 @@ int	sin_cmd(t_var *data, t_cmd *cmd)
 
 void	rid(t_cmd data)
 {
+	int	fd[2];
+
+	if (data.her)
+		herdoc(data);
 	if (data.infile != -1)
+	{
+		write(2, "werfhdnk\n", 9);
 		dup2(data.infile, 0);
+	}
 	if (data.outfile != -1)
+	{
+		write(2, "qwertyuiop\n", 10);
 		dup2(data.outfile, 1);
+	}
+	if (data.apend != -1)
+	{
+		write(2, "zzzzzzzzz\n", 10);
+		dup2(data.apend, 1);
+	}
 }
 
 void	child_proc(t_cmd *cmd, t_var *var, int *pip, int *pip_i)
 {
 	close(pip[0]);
+	if (cmd->her)
+		herdoc(*cmd);
 	if (cmd->infile != -1)
 		dup2(cmd->infile, 0);
 	else
 		dup2(pip_i[0], 0);
+	if (cmd->apend != -1)
+		dup2(cmd->apend, 1);
 	if (cmd->outfile != -1)
 		dup2(cmd->outfile, 1);
 	if (pip_i[1] + 1 >= cmd->num_pip)
@@ -91,8 +110,8 @@ int	mult_cmd(t_cmd *cmd, t_var *var, int pip_in, int i)
 	pid_t	pid;
 	int		pip_i[2];
 
-	if (pipe(pip))
-		perror("minishell:");
+	if (pipe(pip) == -1)
+		return (perror("minishell:"), 1);
 	pid = fork();
 	if (pid == -1)
 	{
