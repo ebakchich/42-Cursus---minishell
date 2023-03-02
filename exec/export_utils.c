@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:47:53 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 14:40:32 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:01:59 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	valexp(char **env, char *var, int *flag)
 		}
 		if (i != 0 && var[i] == '=')
 			return (0);
-		else if (i == 0 && !isalpha(var[i]) && var[i] != '_')
+		else if (i == 0 && !ft_isalpha(var[i]) && var[i] != '_')
 			return (1);
-		else if (i != 0 && !isalnum(var[i]) && var[i] != '_')
+		else if (i != 0 && !ft_isalnum(var[i]) && var[i] != '_')
 			return (1);
 		i++;
 	}
@@ -50,7 +50,7 @@ char	**sort(char **env)
 		j = i + 1;
 		while (env[j])
 		{
-			if (strcmp(env[i], env[j]) > 0)
+			if (ft_strcmp(env[i], env[j]) > 0)
 			{
 				tmp = env[i];
 				env[i] = env[j];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 16:30:44 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:04:28 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	main(int ac, char **av, char **env)
 	char	*line;
 	t_var	*var;
 
+	(void)av;
+	(void)ac;
 	var = malloc(sizeof(t_var));
 	var->env = dup_matrix(env);
 	if (!var->env)
