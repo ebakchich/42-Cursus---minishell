@@ -6,7 +6,7 @@
 #    By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 02:43:28 by ebakchic          #+#    #+#              #
-#    Updated: 2023/03/02 18:50:48 by yoyahya          ###   ########.fr        #
+#    Updated: 2023/03/02 19:57:36 by yoyahya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME    = minishell
 OBJS 	= ${SRCS:.c=.o}
 LBFT	= libft/libft.a
 CC		= cc -g
-FLAGS  = -Wall -Wextra -Werror -lreadline -fsanitize=address
+CFLAGS  = -Wall -Wextra -Werror -lreadline -L /Users/ebakchic/homebrew/Cellar/readline/8.2.1/lib -I /Users/ebakchic/homebrew/Cellar/readline/8.2.1/include -fsanitize=address
 MAKEC	= make clean
 MAKEF	= make fclean
 MAKER	= make re
@@ -26,7 +26,7 @@ all: $(NAME)
 
 $(NAME): ${OBJS}
 	@$(MAKE) -C libft
-	@$(CC) $(FLAGS) -o ${NAME} ${LBFT} ${OBJS}
+	@$(CC) $(CFLAGS) -o ${NAME} ${LBFT} ${OBJS}
 	@stty -echoctl
 
 clean:
