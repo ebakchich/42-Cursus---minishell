@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:10:17 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 15:52:22 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:51:26 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	check_exist(char **env, char *str)
 int	updpwd(t_var *data)
 {
 	char	*oldpwd;
-	char	*tmp;
 	int		i;
 	char	pwd[PATH_MAX];
 
@@ -84,7 +83,6 @@ int	update(t_var **data, char *old)
 		repenv(*data, tmp, i);
 	else
 		appenv(data, tmp);
-	printf("afuagdfbkdz,c xz,\n");
 	i = 0;
 	tmp = ft_strjoin(ft_strdup("OLDPWD="), old);
 	if (findenv(*data, "OLDPWD=", &i) == 0)

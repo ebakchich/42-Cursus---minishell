@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:52:07 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 09:27:29 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:46:53 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*get_name(char *str)
 {
 	char	*tmp;
-	char	*tmp1;
 
 	if (!str || !*str)
 		return (NULL);

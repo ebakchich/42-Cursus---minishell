@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:10:28 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 13:33:33 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:44:15 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	echo(char **str)
 	while (str[i])
 	{
 		if (ft_strncmp(str[i], "-n", 2) == 0 && \
-					(countn(str[i]) == ft_strlen(str[i])))
+					(countn(str[i]) == (int)ft_strlen(str[i])))
 			line = 0;
 		else
 		{

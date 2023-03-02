@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:32:48 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:49:11 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*get_next_line(int fd);
 
 ////////////// exec //////////
 
-void	waitpro(int pid, int ncmd, int *status);
+void	waitpro(int ncmd, int *status);
 int		update(t_var **data, char *old);
 int		sel_builtin(t_cmd *cmd, t_var *data, int flag);
 char	*ft_strjoin1(char *s1, char *s2);
@@ -135,7 +135,7 @@ int 	ft_exec(t_var *var, t_cmd *cmd);
 void	rid(t_cmd data);
 int		builtin(t_cmd *cmd, t_var *var, int fork);
 int 	cd(char **cmd, t_var *data);
-int 	cd_1(char **cmd, t_var *data);
+int 	cd_1(t_var *data);
 void 	ft_exit(t_cmd *cmd);
 char 	*get_path(t_var *var, t_cmd *cmd);
 int 	exec_cmd(t_cmd *cmd, t_var *var);
@@ -151,7 +151,7 @@ int		updpwd(t_var *data);
 char	*ft_strjoin_3(char *s1, char *s2);
 int		check_acc(char *command, char **path);
 int		joinenv3(t_var **var, char *vale, char *val, int pos);
-int		joinenv2(t_var **var, char *cmd, char *val, int pos);
+int		joinenv2(t_var **var, char *val, int pos);
 int		ft_export2(t_var *var, char *cmd, int flag);
 void    herdoc(t_cmd data);
 

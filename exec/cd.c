@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:10:14 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 13:09:22 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:42:41 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ char	*get_env(char **env, char *line)
 	return (NULL);
 }
 
-int	cd_1(char **cmd, t_var *data)
+int	cd_1(t_var *data)
 {
-	char	*oldpwd ;
-	char	*pwd;
-	int		pos;
+	char	*oldpwd;
 
 	if (!data || !data->env)
 		return (0);
@@ -43,6 +41,8 @@ int	cd_1(char **cmd, t_var *data)
 		return (cd_err("OLDPWD", 3));
 	if (chdir(oldpwd) == -1)
 		return (cd_err(oldpwd, 2));
+	else
+		ft_pwd();
 	return (0);
 }
 
@@ -61,7 +61,7 @@ int	cd(char **cmd, t_var *data)
 	}
 	else if (ft_strncmp(cmd[1], "-", ft_strlen(cmd[1])) == 0)
 	{
-		cd_1(cmd, data);
+		cd_1(data);
 		return (update(&data, old));
 	}
 	else if (chdir(cmd[1]) == -1)

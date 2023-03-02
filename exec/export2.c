@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:07:12 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/01 13:38:05 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:48:54 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ int	joinenv3(t_var **var, char *vale, char *val, int pos)
 	return (0);
 }
 
-int	joinenv2(t_var **var, char *cmd, char *val, int pos)
+int	joinenv2(t_var **var, char *val, int pos)
 {
 	char	*namee;
 	char	*vale;
 	char	*tmp;
 
+	vale = NULL;
 	namee = ft_strchr((*var)->env[pos], '=');
 	if (val && !namee)
 	{

@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:07:12 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/01 13:37:53 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:49:53 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	joinenv(t_var **var, char *cmd)
 		return (1);
 	}
 	if (findenv(*var, cmd, &pos) == 0)
-		joinenv2(var, cmd, val, pos);
+		joinenv2(var, val, pos);
 	else
 	{
 		free(val);
@@ -93,9 +93,7 @@ int	appenv(t_var **data, char *var)
 
 int	ft_export(t_var *var, char **cmd)
 {
-	int		len;
 	int		i;
-	char	*tmp;
 	int		flag;
 
 	flag = 0;

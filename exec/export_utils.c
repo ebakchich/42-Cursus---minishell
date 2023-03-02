@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:47:53 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 18:01:59 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:47:47 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int	printenv(char **env)
 
 	i = 0;
 	j = 0;
+	tmp = NULL;
 	if (!env)
 		return (1);
 	dup = dup_matrix(env);
