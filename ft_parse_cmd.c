@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 17:12:33 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:33:58 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_check_file(t_cmd *cmd, char **token)
 
 int	ft_if_red(char *token, char **dr)
 {
-	int	len;
+	size_t	len;
 	int	i;
 
 	i = 0;
@@ -78,11 +78,11 @@ void	ft_full_cmd(char **token, char **cmd, char **dr)
 	cmd[c] = NULL;
 }
 
-void	ft_parse_cmd(t_cmd *cmd, char **token, char **env)
+void	ft_parse_cmd(t_cmd *cmd, char **token)
 {
 	char	**dr;
 	int		i;
-	int		l;
+	size_t		l;
 	int		count;
 
 	count = 0;

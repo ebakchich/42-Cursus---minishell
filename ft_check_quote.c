@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:48:03 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:07:44 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:27:41 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ char	*ft_remove_db(char *l, int x)
 int	ft_check_quote(char **full_cmd)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (full_cmd[i])

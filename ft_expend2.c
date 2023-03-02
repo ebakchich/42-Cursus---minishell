@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 02:42:55 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 10:00:35 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:36:25 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_check_sp2(char *l, char *new, int i)
 char	*ft_check_sp(char *l)
 {
 	char	*new;
-	int		x;
 	int		i;
 	int		j;
 

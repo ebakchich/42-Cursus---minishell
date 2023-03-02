@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:15:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 17:11:10 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:37:11 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	*ft_get_fd2(t_cmd *cmd, char *t, int j)
 void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 {
 	char	*ptr;
-	int		len;
+	size_t		len;
 	int		i;
 
 	i = 0;

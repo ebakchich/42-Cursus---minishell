@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:16:54 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:32:48 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		ft_atoi(const char *str);
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
-void	ft_parse_cmd(t_cmd *cmd, char **token, char **env);
+void	ft_parse_cmd(t_cmd *cmd, char **token);
 void	ft_chng_c(char *line, char c);
 void	ft_check_her(t_cmd *cmd, char **token, int i);
 void	ft_free(char *p, char **p2);

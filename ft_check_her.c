@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:37:21 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 07:51:12 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:35:54 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	ft_ex_c(char *line)
 
 char	**ft_ex_del(char **token, int l)
 {
-	char	*tmp;
 	char	**del;
 	int		i;
 	int		k;
@@ -49,7 +48,7 @@ char	**ft_ex_del(char **token, int l)
 	return (del);
 }
 
-void	ft_check_her2(t_cmd *cmd, char *del, int j, int len)
+void	ft_check_her2(t_cmd *cmd, char *del, int j, size_t len)
 {
 	char	*her;
 
@@ -79,7 +78,6 @@ void	ft_check_her2(t_cmd *cmd, char *del, int j, int len)
 
 void	ft_check_her(t_cmd *cmd, char **token, int i)
 {
-	char	*her;
 	char	**del;
 	int		count;
 	int		l;

@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:13:54 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/01 11:15:15 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:34:29 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_count_c(char *line, int c)
 int	ft_count_str(char **token, char *str)
 {
 	int	i;
-	int	len;
+	size_t	len;
 	int	count;
 
 	i = 0;
