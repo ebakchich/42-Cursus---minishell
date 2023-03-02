@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 16:06:29 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:16:54 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*get_next_line(int fd);
 
 ////////////// exec //////////
 
+void	waitpro(int pid, int ncmd, int *status);
 int		update(t_var **data, char *old);
 int		sel_builtin(t_cmd *cmd, t_var *data, int flag);
 char	*ft_strjoin1(char *s1, char *s2);

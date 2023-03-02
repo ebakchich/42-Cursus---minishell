@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:45:58 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 17:54:42 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 18:17:52 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ void	herdoc(t_cmd data)
 	write(fd[1], data.her, ft_strlen(data.her));
 	dup2(fd[0], 0);
 	close(fd[1]);
+}
+
+void	waitpro(int pid, int ncmd, int *status)
+{
+	int	i;
+
+	i = -1;
+	while (++i < ncmd)
+	{
+		pid = wait(status);
+		if (pid == g_ex.id)
+			g_ex.exit_status = WEXITSTATUS(status);
+	}
 }
 
 int	ft_exec(t_var *data, t_cmd *cmd)
@@ -50,13 +63,7 @@ int	ft_exec(t_var *data, t_cmd *cmd)
 		if (cmd[i].if_v != -1 && cmd->cmd)
 			pip_in = mult_cmd(&cmd[i], data, pip_in, i);
 	}
-	i = -1;
-	while (++i < cmd->num_pip)
-	{
-		pid = wait(&status);
-		if (pid == g_ex.id)
-			g_ex.exit_status = WEXITSTATUS(status);
-	}
+	waitpro(pid, cmd->num_pip, &status);
 	sel_builtin(cmd, data, 0);
 	return (status);
 }
