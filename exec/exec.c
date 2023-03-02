@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:45:58 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/01 13:38:37 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:02:24 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,21 @@ int	ft_exec(t_var *data, t_cmd *cmd)
 
 	pip_in = STDIN_FILENO;
 	i = -1;
-	if (!data || !cmd || !cmd[0].cmd)
+	if (!data || !cmd)
 		return (0);
 	ncmd = cmd[0].num_pip;
 	if (cmd[0].if_v != -1 && ncmd == 1 && is_builtin(cmd[0].cmd[0]))
-		return (sel_builtin(cmd, data));
+		return (sel_builtin(cmd, data, 1));
 	else if (cmd[0].if_v != -1 && ncmd == 1 && !is_builtin(cmd[0].cmd[0]))
 		return (sin_cmd(data, cmd));
-	while (cmd[0].if_v != -1 && ++i < ncmd && cmd[i].cmd)
-		pip_in = mult_cmd(&cmd[i], data, pip_in, i);
+	while (++i < ncmd)
+	{
+		if(cmd[i].if_v != -1)
+			pip_in = mult_cmd(&cmd[i], data, pip_in, i);
+	}
 	i = -1;
 	while (++i < ncmd)
 		wait(&status);
+	sel_builtin(cmd, data, 0);
 	return (status);
 }

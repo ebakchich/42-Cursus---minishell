@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/01 13:38:44 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:01:59 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ int	sin_cmd(t_var *data, t_cmd *cmd)
 
 void	rid(t_cmd data)
 {
-	int	fd[2];
-
-	if (data.her)
+	if (data.her && data.her[0])
 		herdoc(data);
 	if (data.infile != -1)
 	{
@@ -83,7 +81,7 @@ void	rid(t_cmd data)
 void	child_proc(t_cmd *cmd, t_var *var, int *pip, int *pip_i)
 {
 	close(pip[0]);
-	if (cmd->her)
+	if (cmd->her && cmd->her[0])
 		herdoc(*cmd);
 	if (cmd->infile != -1)
 		dup2(cmd->infile, 0);
@@ -95,7 +93,7 @@ void	child_proc(t_cmd *cmd, t_var *var, int *pip, int *pip_i)
 		dup2(cmd->outfile, 1);
 	if (pip_i[1] + 1 >= cmd->num_pip)
 		close(pip[1]);
-	else
+	else if (cmd->outfile == -1)
 		dup2(pip[1], 1);
 	if (cmd->cmd[0] && !is_builtin(cmd->cmd[0]))
 		exec_cmd(cmd, var);
