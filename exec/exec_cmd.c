@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 13:01:59 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:37:06 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	exec_cmd(t_cmd *cmd, t_var *var)
 int	sin_cmd(t_var *data, t_cmd *cmd)
 {
 	int	pid;
+	int	status;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid < 0)
 	{
@@ -50,10 +52,17 @@ int	sin_cmd(t_var *data, t_cmd *cmd)
 	}
 	else if (pid == 0)
 	{
+		signal(SIGQUIT, signal_handler_ch);
+		signal(SIGINT, signal_handler_ch);
 		rid(*cmd);
 		exec_cmd(cmd, data);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	g_ex.exit_status = WEXITSTATUS(status);
+	if (status == 2)
+		g_ex.exit_status = 130;
+	if (status == 3)
+		g_ex.exit_status = 131;
 	return (0);
 }
 
@@ -111,6 +120,7 @@ int	mult_cmd(t_cmd *cmd, t_var *var, int pip_in, int i)
 	if (pipe(pip) == -1)
 		return (perror("minishell:"), 1);
 	pid = fork();
+	g_ex.id = pid;
 	if (pid == -1)
 	{
 		perror("minishell:");
@@ -118,6 +128,7 @@ int	mult_cmd(t_cmd *cmd, t_var *var, int pip_in, int i)
 	}
 	if (pid == 0)
 	{
+		signal(SIGINT, signal_handler_ch);
 		pip_i[0] = pip_in;
 		pip_i[1] = i;
 		child_proc(cmd, var, pip, pip_i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 10:29:05 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:06:29 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 #include <fcntl.h>
 # include <sys/wait.h>
 
+#include <ctype.h>
+#include <string.h>
+
 typedef struct s_var
 {
 	char **env;
@@ -32,7 +35,9 @@ typedef struct s_var
 
 typedef struct s_gl_data
 {
-	int	exit_status;
+	int		exit_status;
+	pid_t	id;
+	char	**ev;
 }	t_gl_data;
 
 t_gl_data	g_ex;
@@ -57,13 +62,18 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*add_befor_c(char *line, int c);
 char	*ft_check_sp(char *l);
 char	*ft_expend(char *line);
+char	*ft_before_expend(char *t);
+char	*ft_join_all(char **ex);
+char	*get_env(char **env, char *line);
+char	*ft_itoa(int n);
+char    *ft_expend_ex(char *line);
 
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_check_quote(char **line);
 int		ft_chrafter(char *line, int i, int c);
 int		ft_chrafterr(char *line, int i);
 int		ft_ex_c(char *line);
-int		ft_check_error_file(char *name, int j, int *if_v);
+int		ft_check_error_file(char *name, int j, t_cmd *cmd);
 int		ft_count_str(char **token, char *str);
 int		ft_chrafterr(char *line, int j);
 int		ft_count_c(char *line, int c);
@@ -82,6 +92,7 @@ void	rl_replace_line(const char *text, int clear_undo);
 void	signal_handler(int signum);
 void	signal_handler_her(int signum);
 void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j);
+void	signal_handler_ch(int signum);
 
 t_cmd	*ft_getcmd(char **full_cmd, char **env);
 
@@ -96,7 +107,7 @@ char	*get_next_line(int fd);
 ////////////// exec //////////
 
 int		update(t_var **data, char *old);
-int		sel_builtin(t_cmd *cmd, t_var *data);
+int		sel_builtin(t_cmd *cmd, t_var *data, int flag);
 char	*ft_strjoin1(char *s1, char *s2);
 int 	findenv(t_var *data, char *var, int *i);
 int 	is_valid(char *str);
@@ -141,4 +152,6 @@ int		check_acc(char *command, char **path);
 int		joinenv3(t_var **var, char *vale, char *val, int pos);
 int		joinenv2(t_var **var, char *cmd, char *val, int pos);
 int		ft_export2(t_var *var, char *cmd, int flag);
+void    herdoc(t_cmd data);
+
 #endif

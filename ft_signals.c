@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 01:35:33 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 04:56:59 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:36:52 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,9 @@ void	signal_handler(int signum)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
+}
+
+void	signal_handler_ch(int signum)
+{
+	return ;
 }

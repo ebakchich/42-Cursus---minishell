@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 07:17:18 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:57:10 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*ft_get_env(char *line)
 	int		i;
 	char	*tmp;
 
+	line = ft_expend_ex(line);
 	line = ft_check_sp(line);
 	ex = ft_split(line, -1);
 	i = 0;

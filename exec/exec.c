@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:45:58 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 13:02:24 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 13:56:04 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_exec(t_var *data, t_cmd *cmd)
 	int	status;
 	int	ncmd;
 	int	pip_in;
+	int pid;
 
 	pip_in = STDIN_FILENO;
 	i = -1;
@@ -48,8 +49,12 @@ int	ft_exec(t_var *data, t_cmd *cmd)
 			pip_in = mult_cmd(&cmd[i], data, pip_in, i);
 	}
 	i = -1;
-	while (++i < ncmd)
-		wait(&status);
+	while (++i < cmd->num_pip)
+	{
+		pid = wait(&status);
+		if (pid == g_ex.id)
+			g_ex.exit_status = WEXITSTATUS(status);
+	}
 	sel_builtin(cmd, data, 0);
 	return (status);
 }

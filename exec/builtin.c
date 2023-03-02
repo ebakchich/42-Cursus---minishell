@@ -3,27 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:24:18 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 09:30:31 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 14:33:31 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	sel_builtin(t_cmd *cmd, t_var *data)
+int    sel_builtin(t_cmd *cmd, t_var *data, int flag)
 {
-	int	original;
-	int	ginal;
+    int    original;
+    int    ginal;
 
-	original = dup(1);
-	ginal = dup(0);
-	rid(*cmd);
-	builtin(cmd, data, 0);
-	dup2(original, 1);
-	dup2(ginal, 0);
-	return (0);
+    original = dup(1);
+    ginal = dup(0);
+    if (flag == 1)
+    {
+        rid(*cmd);
+        builtin(cmd, data, 0);
+    }
+    dup2(original, 1);
+    dup2(ginal, 0);
+    return (0);
 }
 
 int	builtin(t_cmd *cmd, t_var *var, int fork)

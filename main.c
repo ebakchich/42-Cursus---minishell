@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/28 16:58:17 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:30:44 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,12 @@ int	main(int ac, char **av, char **env)
 		perror("minishell");
 		return (1);
 	}
+	g_ex.ev = var->env;
 	g_ex.exit_status = 0;
-	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
+		signal(SIGINT, signal_handler);
 		line = readline("\033[32;1m\U000025B6\033[0m \033[32;1mminishell $\033[0m ");
 		if (line == NULL)
 			exit (g_ex.exit_status);
@@ -121,7 +122,6 @@ int	main(int ac, char **av, char **env)
 		if (line[0] != '\0')
 			ft_parse(line, var);
 		free(line);
-		// system("leaks minishell");
 	}
 	return (0);
 }
