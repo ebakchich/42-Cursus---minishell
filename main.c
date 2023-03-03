@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/03 13:04:35 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 13:31:48 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	main(int ac, char **av, char **env)
 	}
 	g_ex.var = var;
 	g_ex.exit_status = 0;
+	g_ex.out = dup(1);
+	g_ex.in = dup(0);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{

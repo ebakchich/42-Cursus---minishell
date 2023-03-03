@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:24:18 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 13:04:31 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 13:32:46 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int	sel_builtin(t_cmd *cmd, t_var *data, int flag)
 		rid(*cmd);
 		builtin(cmd, data, 0);
 	}
-	close(0);
-	close(1);
-	dup(1);
-	dup(0);
+	dup2(g_ex.in, 0);
+	dup2(g_ex.out, 1);
 	return (0);
 }
 
