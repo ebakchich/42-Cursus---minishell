@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:45:58 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 12:41:53 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 12:51:15 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int	ft_exec(t_var *data, t_cmd *cmd)
 	if (!data || !cmd)
 		return (0);
 	ncmd = cmd[0].num_pip;
-	g_ex.in = dup(1);
-	g_ex.out = dup(0);
 	if (cmd[0].if_v != -1 && ncmd == 1 && cmd[0].cmd
 		&& is_builtin(cmd[0].cmd[0]))
 		return (sel_builtin(cmd, data, 1));
