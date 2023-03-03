@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:15:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:37:11 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:05:57 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int	ft_check_error_file2(char *name, t_cmd *cmd)
 {
-	int	v;
-
-	v = -1;
 	if (access(name, F_OK) != -1)
 	{
 		if (access(name, W_OK) == -1)
 		{
 			cmd->if_v = -1;
+			g_ex.exit_status = 1;
 			write(2, "Error: permission denied\n", 25);
 			return (0);
 		}
@@ -31,15 +29,12 @@ int	ft_check_error_file2(char *name, t_cmd *cmd)
 
 int	ft_check_error_file(char *name, int j, t_cmd *cmd)
 {
-	int	v;
-
-	v = -1;
 	if (j == 1)
 	{
 		if (access(name, F_OK) == -1)
 		{
 			cmd->if_v = -1;
-			printf("v  = %d\n", v);
+			g_ex.exit_status = 1;
 			write(2, "Error: No such file or directory ", 32);
 			printf("%s\n", name);
 			return (0);
@@ -47,6 +42,7 @@ int	ft_check_error_file(char *name, int j, t_cmd *cmd)
 		if (access(name, R_OK) == -1)
 		{
 			cmd->if_v = -1;
+			g_ex.exit_status = 1;
 			write(2, "Error: permission denied\n", 25);
 			return (0);
 		}
@@ -79,16 +75,13 @@ int	ft_check_ambiguous(char *line)
 char	*ft_get_fd2(t_cmd *cmd, char *t, int j)
 {
 	if (ft_count_c(t, 36))
-	{
-		printf("t1 = %s\n", t);
 		t = ft_before_expend(t);
-		printf("t2 = %s\n", t);
-	}
 	if (ft_count_c(t, 34) || ft_count_c(t, 39))
 		t = ft_remove_db(t, 1);
 	if (t[0] == '\0')
 	{
 		cmd->if_v = -1;
+		g_ex.exit_status = 1;
 		printf("no such file or directory:\n");
 	}
 	else if (ft_check_error_file(t, j, cmd))
@@ -121,9 +114,10 @@ void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 		{
 			ptr = ft_strdup(t[i + 1]);
 			ptr = ft_before_expend(ptr);
-			if (ft_check_ambiguous(ptr) && ft_ex_c(t[i + 1]) != 39)
+			if (ft_check_ambiguous(ptr) && ft_count_c(t[i + 1], '$'))
 			{
 				cmd->if_v = -1;
+				g_ex.exit_status = 1;
 				printf("%s: ambiguous redirect\n", t[i + 1]);
 			}			
 			else

@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:53:25 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 17:06:18 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:07:16 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ char    *ft_before_expend(char *t)
         if (((count != 0 || sp[i][0] != 39) && (count % 2 == 0) && ft_count_c(sp[i], '$')) || ((count % 2 != 0)))
         {
             count = 0;
-            printf("her = %s\n", sp[i]);
             sp[i] = ft_expend(sp[i]);
         }
         i++;

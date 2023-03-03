@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:33:58 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:42:48 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,7 @@ void	ft_full_cmd(char **token, char **cmd, char **dr)
 		{
 			cmd[c] = ft_strdup(token[i]);
 			if (ft_count_c(cmd[c], '$'))
-			{
-				printf("cmd[c] = %s\n", cmd[c]);
 				cmd[c] = ft_before_expend(cmd[c]);
-				printf("cmd[c] = %s\n", cmd[c]);
-			}
 			if (ft_count_c(cmd[c], 34) || ft_count_c(cmd[c], 39))
 				cmd[c] = ft_remove_db(cmd[c], 1);
 			c++;
@@ -76,6 +72,24 @@ void	ft_full_cmd(char **token, char **cmd, char **dr)
 		i++;
 	}
 	cmd[c] = NULL;
+}
+
+void	ft_check_in(t_cmd *cmd, char **token)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (token[i])
+	{
+		if (ft_memcmp(token[i], "<<", 2) == 0)
+			tmp = token[i];
+		else if (ft_memcmp(token[i], "<", 1) == 0)
+			tmp = token[i];
+		i++;
+	}
+	if (ft_memcmp(tmp, "<<", 2) == 0)
+		cmd->infile = -1;
 }
 
 void	ft_parse_cmd(t_cmd *cmd, char **token)
@@ -88,6 +102,7 @@ void	ft_parse_cmd(t_cmd *cmd, char **token)
 	count = 0;
 	ft_check_her(cmd, token, 0);
 	ft_check_file(cmd, token);
+	ft_check_in(cmd, token);
 	dr = ft_split(">> << < >", ' ');
 	l = 0;
 	while (token[l])
