@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expend.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:36:10 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/03 08:40:01 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_get_env2(char *line)
 	while (ex[i])
 	{
 		tmp = ex[i];
-		ex[i] = ft_strdup(getenv(ex[i]));
+		ex[i] = ft_strdup(get_env(g_ex.var->env, ex[i]));
 		free(tmp);
 		i++;
 	}

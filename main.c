@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:04:28 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 11:53:12 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,10 @@ int	main(int ac, char **av, char **env)
 		perror("minishell");
 		return (1);
 	}
-	g_ex.ev = var->env;
+	g_ex.var = var;
 	g_ex.exit_status = 0;
+	g_ex.out = dup(1);
+	g_ex.in = dup(0);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{

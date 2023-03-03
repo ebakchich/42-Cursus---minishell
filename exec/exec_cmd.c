@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 16:37:06 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:58:42 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exec_cmd(t_cmd *cmd, t_var *var)
 	command = get_path(var, cmd);
 	if (!command)
 	{
-		perror("minishell");
+		ft_putendl_fd("minishell: No such file or directory", 2);
 		exit(127);
 	}
 	if (execve(command, cmd[0].cmd, var->env) == -1)
@@ -59,9 +59,9 @@ int	sin_cmd(t_var *data, t_cmd *cmd)
 	}
 	waitpid(pid, &status, 0);
 	g_ex.exit_status = WEXITSTATUS(status);
-	if (status == 2)
+	if (status == SIGINT)
 		g_ex.exit_status = 130;
-	if (status == 3)
+	if (status == SIGQUIT)
 		g_ex.exit_status = 131;
 	return (0);
 }
@@ -91,23 +91,51 @@ void	child_proc(t_cmd *cmd, t_var *var, int *pip, int *pip_i)
 {
 	close(pip[0]);
 	if (cmd->her && cmd->her[0])
+	{
+		write(2, "zz\n", 3);
 		herdoc(*cmd);
+	}
 	if (cmd->infile != -1)
+	{
+		write(2, "xx\n", 3);
 		dup2(cmd->infile, 0);
+	}
 	else
+	{
+		write(2, "cc\n", 3);
+		printf("---%d\n", pip_i[0]);
 		dup2(pip_i[0], 0);
+	}
 	if (cmd->apend != -1)
+	{
+		write(2, "vv\n", 3);
 		dup2(cmd->apend, 1);
+	}
 	if (cmd->outfile != -1)
+	{
+		write(2, "bb\n", 3);
 		dup2(cmd->outfile, 1);
+	}
 	if (pip_i[1] + 1 >= cmd->num_pip)
+	{
+		write(2, "nn\n", 3);
 		close(pip[1]);
+	}
 	else if (cmd->outfile == -1)
+	{
+		write(2, "mm\n", 3);
 		dup2(pip[1], 1);
+	}
 	if (cmd->cmd[0] && !is_builtin(cmd->cmd[0]))
+	{
+		write(2, "aa\n", 3);
 		exec_cmd(cmd, var);
+	}
 	else
+	{
+		write(2, "ss\n", 3);
 		builtin(cmd, var, 1);
+	}
 	exit(0);
 }
 
@@ -132,8 +160,9 @@ int	mult_cmd(t_cmd *cmd, t_var *var, int pip_in, int i)
 		pip_i[0] = pip_in;
 		pip_i[1] = i;
 		child_proc(cmd, var, pip, pip_i);
+		close(pip[1]);
 	}
-	if (i != 0)
+	if (i != 0 && pip_in != 0)
 		close(pip_in);
 	close(pip[1]);
 	return (pip[0]);

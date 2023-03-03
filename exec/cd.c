@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:10:14 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 18:42:41 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 12:48:42 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ char	*get_env(char **env, char *line)
 {
 	int		i;
 	char	*tmp;
-
+	int		count;
+	
 	i = 0;
+	count = ft_strlen(line);
 	while (env[i])
 	{
-		if (ft_strncmp(line, env[i], ft_strlen(line)) == 0)
+		if (ft_strncmp(line, env[i], ft_strlen(line)) == 0 && env[i][count] == '=')
 		{
 			tmp = ft_strchr(env[i], '=');
 			return (tmp + 1);
