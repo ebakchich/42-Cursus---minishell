@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:01:33 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/28 13:18:08 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 20:42:50 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,17 @@ int	unset(t_var *data, char **cmd)
 	int		pos;
 	char	**nenv;
 	int		i;
+	int		status;
 
-	i = 1;
+	i = 0;
 	pos = 0;
+	status = 0;
 	nenv = NULL;
-	while (cmd && cmd[i])
+	while (cmd && cmd[++i])
 	{
 		lenx = len_matrix(data->env);
 		if (cmd[i] && is_valid(cmd[i]) != 0)
-			unset_err(cmd[i], 1);
+			status = unset_err(cmd[i], 1);
 		else if (findenv(data, cmd[i], &pos) == 0)
 		{
 			nenv = remenv(data->env, pos, lenx);
@@ -63,7 +65,6 @@ int	unset(t_var *data, char **cmd)
 			free_matrix(data->env);
 			data->env = nenv;
 		}
-		i++;
 	}
-	return (0);
+	return (status);
 }

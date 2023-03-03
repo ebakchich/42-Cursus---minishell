@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:47:53 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 18:47:47 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 20:20:52 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	valexp(char **env, char *var, int *flag)
 	int	i;
 
 	i = 0;
-	if (!env)
+	if (!env || !var[0])
 		return (1);
 	while (var[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:07:12 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 18:49:53 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 20:19:50 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,10 @@ int	ft_export(t_var *var, char **cmd)
 {
 	int		i;
 	int		flag;
+	int		status;
 
 	flag = 0;
+	status = 0;
 	if (!var || !var->env)
 	{
 		perror("minishell");
@@ -108,10 +110,10 @@ int	ft_export(t_var *var, char **cmd)
 	while (cmd && cmd[i])
 	{
 		if (valexp(var->env, cmd[i], &flag) == 1)
-			export_err(cmd[i], 1);
+			status = export_err(cmd[i], 1);
 		else
 			ft_export2(var, cmd[i], flag);
 		i++;
 	}
-	return (0);
+	return (status);
 }
