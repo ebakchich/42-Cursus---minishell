@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 11:58:42 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:17:39 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,71 +71,34 @@ void	rid(t_cmd data)
 	if (data.her && data.her[0])
 		herdoc(data);
 	if (data.infile != -1)
-	{
-		write(2, "werfhdnk\n", 9);
 		dup2(data.infile, 0);
-	}
 	if (data.outfile != -1)
-	{
-		write(2, "qwertyuiop\n", 10);
 		dup2(data.outfile, 1);
-	}
 	if (data.apend != -1)
-	{
-		write(2, "zzzzzzzzz\n", 10);
 		dup2(data.apend, 1);
-	}
 }
 
 void	child_proc(t_cmd *cmd, t_var *var, int *pip, int *pip_i)
 {
 	close(pip[0]);
 	if (cmd->her && cmd->her[0])
-	{
-		write(2, "zz\n", 3);
 		herdoc(*cmd);
-	}
 	if (cmd->infile != -1)
-	{
-		write(2, "xx\n", 3);
 		dup2(cmd->infile, 0);
-	}
 	else
-	{
-		write(2, "cc\n", 3);
-		printf("---%d\n", pip_i[0]);
 		dup2(pip_i[0], 0);
-	}
 	if (cmd->apend != -1)
-	{
-		write(2, "vv\n", 3);
 		dup2(cmd->apend, 1);
-	}
 	if (cmd->outfile != -1)
-	{
-		write(2, "bb\n", 3);
 		dup2(cmd->outfile, 1);
-	}
 	if (pip_i[1] + 1 >= cmd->num_pip)
-	{
-		write(2, "nn\n", 3);
 		close(pip[1]);
-	}
 	else if (cmd->outfile == -1)
-	{
-		write(2, "mm\n", 3);
 		dup2(pip[1], 1);
-	}
 	if (cmd->cmd[0] && !is_builtin(cmd->cmd[0]))
-	{
-		write(2, "aa\n", 3);
 		exec_cmd(cmd, var);
-	}
 	else
-	{
-		write(2, "ss\n", 3);
 		builtin(cmd, var, 1);
-	}
 	exit(0);
 }
 

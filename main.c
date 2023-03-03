@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/03 15:16:05 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/03 15:51:37 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_red_chr(char *l, int x)
 		if (l[i] == '|')
 		{
 			printf("parse error near '%c'\n", l[i]);
-			g_ex.exit_status = 130;
+			g_ex.exit_status = 258;
 			return (-1);
 		}
 	}
@@ -35,7 +35,7 @@ int	ft_red_chr(char *l, int x)
 		if (l[i] == '<' || l[i] == '>' || l[i] == '|' || l[i] == '\0')
 		{
 			printf("parse error near '%c'\n", l[i]);
-			g_ex.exit_status = 1;
+			g_ex.exit_status = 258;
 			return (-1);
 		}
 	}
@@ -50,7 +50,7 @@ int	ft_check_error(char *line, char *l, int x)
 	if (l[0] == '|' || l[ft_strlen(l) - 1] == '|')
 	{
 		printf("parse error near '%c'\n", line[i]);
-		g_ex.exit_status = 130;
+		g_ex.exit_status = 258;
 		return (-1);
 	}
 	while (line[i])
