@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:45:58 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 13:34:26 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 18:24:49 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,14 @@ void	waitpro(int ncmd, int *status)
 	{
 		pid = wait(status);
 		if (pid == g_ex.id)
-			g_ex.exit_status = WEXITSTATUS(status);
+		{
+			if (*status == SIGINT)
+				g_ex.exit_status = 130;
+			else if (*status == SIGQUIT)
+				g_ex.exit_status = 131;
+			else
+				g_ex.exit_status = (*status) / 256;
+		}
 	}
 }
 

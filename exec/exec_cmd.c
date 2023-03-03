@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 16:17:39 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 18:41:14 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	exec_cmd(t_cmd *cmd, t_var *var)
 		perror("minishell:");
 		exit(126);
 	}
-	return (0);
+	exit(0);
 }
 
 int	sin_cmd(t_var *data, t_cmd *cmd)
@@ -47,7 +47,7 @@ int	sin_cmd(t_var *data, t_cmd *cmd)
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("Error :");
+		perror("minishell");
 		return (1);
 	}
 	else if (pid == 0)
@@ -113,13 +113,11 @@ int	mult_cmd(t_cmd *cmd, t_var *var, int pip_in, int i)
 	pid = fork();
 	g_ex.id = pid;
 	if (pid == -1)
-	{
-		perror("minishell:");
-		return (1);
-	}
+		return (perror("minishell:"), 1);
 	if (pid == 0)
 	{
 		signal(SIGINT, signal_handler_ch);
+		signal(SIGQUIT, signal_handler_ch);
 		pip_i[0] = pip_in;
 		pip_i[1] = i;
 		child_proc(cmd, var, pip, pip_i);
