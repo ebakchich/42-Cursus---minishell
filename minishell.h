@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/03 08:48:27 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 13:05:28 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_gl_data
 {
 	int		exit_status;
 	pid_t	id;
-	int		in;
-	int		out;
 	t_var	*var;
 }	t_gl_data;
 
