@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expend.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 06:18:50 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/03 08:40:01 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/03 22:19:29 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*ft_get_env(char *line)
 	char	**ex;
 	int		i;
 
-	line = ft_expend_ex(line);
 	line = ft_check_sp(line);
 	ex = ft_split(line, -1);
 	i = 0;
