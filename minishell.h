@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 08:42:33 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 08:46:46 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		unset(t_var *data, char **cmd);
 int 	ft_pwd(void);
 int 	is_builtin(char *cmd);
 int 	valexp(char **env, char *var, int *flag);
-int		repenv(t_var *data, char *var, int pos);
+int		repenv(t_var *data, char *var, int pos, int len);
 int		appenv(t_var **data, char *var);
 int		ft_export(t_var *var, char **cmd);
 int		env(char **env);

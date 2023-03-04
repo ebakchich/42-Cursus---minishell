@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/04 07:07:34 by yoyahya          ###   ########.fr       */
-=======
-/*   Updated: 2023/03/04 08:32:29 by ebakchic         ###   ########.fr       */
->>>>>>> e808924090bebfb06bb3e0c1c63a26de082eaaa2
+/*   Updated: 2023/03/04 08:46:24 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 

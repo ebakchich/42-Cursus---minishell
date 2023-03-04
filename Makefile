@@ -6,13 +6,10 @@
 #    By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 02:43:28 by ebakchic          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/03/04 08:11:58 by yoyahya          ###   ########.fr        #
-=======
-#    Updated: 2023/03/03 23:39:05 by ebakchic         ###   ########.fr        #
->>>>>>> e808924090bebfb06bb3e0c1c63a26de082eaaa2
+#    Updated: 2023/03/04 08:46:06 by yoyahya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 SRCS    = main.c ft_check_quote.c ft_getcmd.c ft_parse_cmd.c ft_common_functions.c ft_check_her.c ft_expend.c ft_expend2.c ft_free.c ft_check_error_file.c ft_signals.c ft_before_expend.c \
 	exec/cd.c exec/echo.c exec/env.c exec/exec.c exec/exit.c exec/export.c exec/get_path.c exec/is_builtin.c exec/exec_cmd.c exec/pwd.c exec/unset.c exec/utils.c \
