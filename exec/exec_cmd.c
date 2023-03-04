@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/04 07:16:55 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 21:29:39 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	child_proc(t_cmd *cmd, t_var *var, int *pip, int *pip_i)
 		else
 			builtin(cmd, var, 1);
 	}
-	exit(0);
+	exit(1);
 }
 
 int	mult_cmd(t_cmd *cmd, t_var *var, int pip_in, int i)

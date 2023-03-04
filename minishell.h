@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 08:46:46 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 21:34:07 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_before_expend(char *t, int i);
 char	*ft_join_all(char **ex);
 char	*get_env(char **env, char *line);
 char	*ft_itoa(int n);
-char	*ft_expend_ex(char *line);
+char	*ft_expend_ex(char *line, int i, int count);
 char	*ft_remove_c2(char *line, int c);
 char	*ft_join_all2(char **ex);
 char	*ft_rm_tab(char *line);
@@ -112,9 +112,9 @@ int		findenv(t_var *data, char *var, int *i);
 int		is_valid(char *str);
 char	**remenv(char **env, int pos, int len);
 int		unset(t_var *data, char **cmd);
-int 	ft_pwd(void);
-int 	is_builtin(char *cmd);
-int 	valexp(char **env, char *var, int *flag);
+int		ft_pwd(void);
+int		is_builtin(char *cmd);
+int		valexp(char **env, char *var, int *flag);
 int		repenv(t_var *data, char *var, int pos, int len);
 int		appenv(t_var **data, char *var);
 int		ft_export(t_var *var, char **cmd);
@@ -151,7 +151,7 @@ int		check_acc(char *command, char **path);
 int		joinenv3(t_var **var, char *vale, char *val, int pos);
 int		joinenv2(t_var **var, char *val, int pos);
 int		ft_export2(t_var *var, char *cmd, int flag);
-void    herdoc(t_cmd data);
+void	herdoc(t_cmd data);
 int		fill_ex(int *i, char **nenv, char *var);
 
 #endif

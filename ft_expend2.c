@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 02:42:55 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 06:02:37 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:00:42 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,21 @@
 char	*ft_join_all2(char **ex)
 {
 	char	*line;
+	char	*tmp;
 	int		i;
 
+	tmp = ft_strdup("a");
+	tmp[0] = -1;
 	i = 0;
 	line = ft_strdup("");
 	while (ex[i])
 	{
 		line = ft_strjoin(line, ex[i]);
+		if (i != 0 && ex[i - 1][0] == -1)
+			line = ft_strjoin(line, tmp);
 		i++;
 	}
+	free(tmp);
 	ft_free(NULL, ex);
 	return (line);
 }

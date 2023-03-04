@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:52:07 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/04 06:59:06 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 21:21:35 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	findenv(t_var *data, char *var, int *i)
 {
 	char	*str;
 	char	*str1;
+	size_t	count;
 
 	*i = 0;
 	str = get_name(var);
@@ -50,7 +51,10 @@ int	findenv(t_var *data, char *var, int *i)
 	while (data->env[(*i)])
 	{
 		str1 = get_name(data->env[(*i)]);
-		if (str1 && ft_strncmp(str1, str, ft_strlen(str)) == 0)
+		count = ft_strlen(str);
+		if (count < ft_strlen(str1))
+			count = ft_strlen(str1);
+		if (str1 && ft_strncmp(str1, str, count) == 0)
 		{
 			free(str1);
 			free(str);

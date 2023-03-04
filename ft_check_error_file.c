@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:15:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 08:24:49 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:05:18 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_check_error_file(char *name, int j, t_cmd *cmd)
 			write(2, "Error: No such file or directory ", 33);
 			ft_putstr_fd(name, 2);
 			ft_putstr_fd("\n", 2);
-			return (0);
+			return (88);
 		}
 		if (access(name, R_OK) == -1)
 		{

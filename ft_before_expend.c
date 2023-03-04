@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:53:25 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 08:36:54 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 21:34:42 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,15 @@ int	ft_check_q(char **ex, int i)
 	return (1);
 }
 
-char	*ft_expend_ex(char *line)
+char	*ft_expend_ex(char *line, int i, int count)
 {
 	char	**ex;
-	int		count;
-	int		i;
 
+	if (ft_count_c(line, '?') == 0)
+		return (line);
 	line = add_befor_c(line, '$');
 	line = add_befor_c(line, ' ');
 	ex = ft_split(line, -1);
-	count = 0;
-	i = 0;
 	while (ex[i])
 	{
 		if (ex[i][0] == '$')
@@ -115,7 +113,7 @@ char	*ft_before_expend(char *t, int x)
 	char	**ex;
 	int		i;
 
-	t = ft_expend_ex(t);
+	t = ft_expend_ex(t, 0, 0);
 	if (x == 0)
 		return (ft_expend(t));
 	t = ft_check_sp(t);
@@ -123,7 +121,8 @@ char	*ft_before_expend(char *t, int x)
 	i = 0;
 	while (ex[i])
 	{
-		if (ft_count_c(ex[i], '$') && ft_check_q(ex, i))
+		if (ft_count_c(ex[i], '$') && ft_check_q(ex, i)
+			&& ex[i][0] == '$' && ft_strlen(ex[i]) > 1)
 			ex[i] = ft_expend(ex[i]);
 		i++;
 	}
