@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:46:29 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/04 04:24:11 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 08:25:33 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	ft_exit(t_cmd *cmd)
 	if (i == 2)
 		ft_error2(cmd[0].cmd);
 	ft_putstr_fd("exit\n", 1);
-	ft_putstr_fd("minishell: exit: too many arguments", 1);
+	ft_putstr_fd("minishell: exit: too many arguments\n", 1);
 	g_ex.exit_status = 1;
 }

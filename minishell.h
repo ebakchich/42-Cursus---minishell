@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:07:19 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 05:05:19 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 08:37:33 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int		ft_count_str(char **token, char *str);
 int		ft_chrafterr(char *line, int j);
 int		ft_count_c(char *line, int c);
 int		ft_atoi(const char *str);
+int		ft_count_dol(char **ex, int x);
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 

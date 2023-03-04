@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:48:03 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 03:39:22 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 08:13:03 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	ft_check_quote(char **full_cmd)
 	{
 		if (ft_chrafterr(full_cmd[i], ft_strlen(full_cmd[i])) == 0)
 		{
-			printf("Parse error: Unclosed Quotes\n");
+			ft_putstr_fd("Parse error: Unclosed Quotes\n", 2);
 			return (1);
 		}
 		i++;

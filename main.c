@@ -6,24 +6,23 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 03:06:34 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 05:07:38 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 08:32:29 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_red_chr(char *l, int x)
+int	ft_red_chr(char *l, int x, int i)
 {
-	int		i;
-
-	i = 0;
 	while (l[i] == ' ')
 		i++;
 	if (x == 0)
 	{
 		if (l[i] == '|')
 		{
-			printf("parse error near '%c'\n", l[i]);
+			ft_putstr_fd("parse error near ", 2);
+			write(2, &l[i], 1);
+			ft_putstr_fd("\n", 2);
 			g_ex.exit_status = 258;
 			return (-1);
 		}
@@ -32,7 +31,9 @@ int	ft_red_chr(char *l, int x)
 	{
 		if (l[i] == '<' || l[i] == '>' || l[i] == '|' || l[i] == '\0')
 		{
-			printf("parse error near '%c'\n", l[i]);
+			ft_putstr_fd("parse error near ", 2);
+			write(2, &l[i], 1);
+			ft_putstr_fd("\n", 2);
 			g_ex.exit_status = 258;
 			return (-1);
 		}
@@ -40,29 +41,28 @@ int	ft_red_chr(char *l, int x)
 	return (0);
 }
 
-int	ft_check_error(char *line, char *l, int x)
+int	ft_check_error(char *line, char *l, int x, int i)
 {
-	int		i;
-
-	i = 0;
 	if (l[0] == '|' || l[ft_strlen(l) - 1] == '|')
 	{
-		printf("parse error near '%c'\n", line[i]);
+		ft_putstr_fd("parse error near ", 2);
+		write(2, &l[i], 1);
+		ft_putstr_fd("\n", 2);
 		g_ex.exit_status = 258;
 		return (-1);
 	}
 	while (line[i])
 	{
 		if (ft_chrafterr(l, x) && line[i] == '<' && line[i + 1] == '<')
-			return (ft_red_chr(&line[i + 2], 1));
+			return (ft_red_chr(&line[i + 2], 1, 0));
 		else if (ft_chrafterr(l, x) && line[i] == '>' && line[i + 1] == '>')
-			return (ft_red_chr(&line[i + 2], 1));
+			return (ft_red_chr(&line[i + 2], 1, 0));
 		else if (ft_chrafterr(l, x) && line[i] == '>')
-			return (ft_red_chr(&line[i + 1], 1));
+			return (ft_red_chr(&line[i + 1], 1, 0));
 		else if (ft_chrafterr(l, x) && line[i] == '<')
-			return (ft_red_chr(&line[i + 1], 1));
+			return (ft_red_chr(&line[i + 1], 1, 0));
 		if (ft_chrafterr(l, x) && line[i] == '|')
-			return (ft_red_chr(&line[i + 1], 0));
+			return (ft_red_chr(&line[i + 1], 0, 0));
 		i++;
 	}
 	return (0);
@@ -78,7 +78,7 @@ void	ft_parse(char *line, t_var *var)
 	while (line[i])
 	{
 		if (ft_strchr("<>|", line[i]))
-			if (ft_check_error(line + i, line, i))
+			if (ft_check_error(line + i, line, i, 0))
 				return ;
 		i++;
 	}

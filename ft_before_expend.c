@@ -6,13 +6,13 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:53:25 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/04 06:16:01 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 08:36:54 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_expend_ex2(char *line, int i, int j, int len)
+char	*ft_expend_ex2(char *line, int i, int j)
 {
 	char	*new;
 	char	*x;
@@ -23,8 +23,7 @@ char	*ft_expend_ex2(char *line, int i, int j, int len)
 		free(line);
 		return (x);
 	}
-	len = ft_strlen(x);
-	new = malloc((len + ft_strlen(line)) * sizeof(char));
+	new = malloc((ft_strlen(x) + ft_strlen(line)) * sizeof(char));
 	while (x[i])
 	{
 		new[i] = x[i];
@@ -82,27 +81,6 @@ int	ft_check_q(char **ex, int i)
 	return (1);
 }
 
-int	ft_count_dol(char **ex, int x)
-{
-	int	i;
-	int	count;
-
-	count = 0;
-	i = 0;
-	while (i < x)
-	{
-		printf("ex[i] = %s\n", ex[i]);
-		if (ex[i][0] == '$')
-			count++;
-		else
-			count = 0;
-		i++;
-	}
-	if (count % 2 == 0)
-		return (0);
-	return (1);
-}
-
 char	*ft_expend_ex(char *line)
 {
 	char	**ex;
@@ -123,7 +101,7 @@ char	*ft_expend_ex(char *line)
 		{
 			count = 0;
 			ex[i - 1][0] = -1;
-			ex[i] = ft_expend_ex2(ex[i], 0, 1, 0);
+			ex[i] = ft_expend_ex2(ex[i], 0, 1);
 		}		
 		i++;
 	}
