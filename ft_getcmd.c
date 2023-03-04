@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 09:53:29 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:33:01 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 05:05:12 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*ft_add_space(char *line, int i, int j, int count)
 	return (new);
 }
 
-t_cmd	*ft_getcmd(char **full_cmd, char **env)
+t_cmd	*ft_getcmd(char **full_cmd)
 {
 	int		count;
 	char	*tmp;
@@ -105,7 +105,6 @@ t_cmd	*ft_getcmd(char **full_cmd, char **env)
 	char	**token;
 	int		i;
 
-	(void)env;
 	cmd = malloc(ft_dblen(full_cmd) * sizeof(t_cmd));
 	ft_init_cmd(cmd, ft_dblen(full_cmd));
 	i = 0;
@@ -120,7 +119,7 @@ t_cmd	*ft_getcmd(char **full_cmd, char **env)
 		token = ft_split(tmp, -1);
 		if (count != 0)
 			free(tmp);
-		ft_parse_cmd(&cmd[i], token);
+		ft_parse_cmd(&cmd[i], token, 0);
 		i++;
 		ft_free(NULL, token);
 	}

@@ -6,17 +6,50 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 22:13:31 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/20 17:40:35 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 08:37:06 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free(char *p, char **p2)
+int	ft_count_dol(char **ex, int x)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (i < x)
+	{
+		if (ex[i][0] == '$')
+			count++;
+		else
+			count = 0;
+		i++;
+	}
+	if (count % 2 == 0)
+		return (0);
+	return (1);
+}
+
+char	*ft_rm_tab(char *line)
 {
 	int	i;
 
 	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 9 && ft_chrafterr(line, i))
+			line[i] = ' ';
+		i++;
+	}
+	return (line);
+}
+
+void	ft_free(char *p, char **p2)
+{
+	int	i;
+
 	i = 0;
 	if (p2 != NULL)
 	{

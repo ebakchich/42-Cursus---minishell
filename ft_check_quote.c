@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:48:03 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:27:41 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 08:13:03 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,13 @@ char	*ft_remove_c2(char *line, int c)
 	return (new);
 }
 
-char	*ft_remove_db(char *l, int x)
+char	*ft_remove_db2(char *l, int x, int len, int i)
 {
 	char	*new;
 	int		ch;
-	int		i;
 	int		c;
-	int		len;
 
-	i = 0;
-	c = ft_ex_i(l);
-	len = 0;
-	ch = 0;
-	while (l[i])
-	{
-		if (l[i] != c)
-			len++;
-		if (c == l[i])
-			ch++;
-		i++;
-		if (ch % 2 == 0 && ch != 0)
-		{
-			ch = 0;
-			c = ft_ex_i(l + i);
-		}
-	}
 	new = malloc((len + 1) * sizeof(char));
-	i = 0;
 	c = ft_ex_i(l);
 	len = 0;
 	ch = 0;
@@ -97,6 +77,33 @@ char	*ft_remove_db(char *l, int x)
 	return (new);
 }
 
+char	*ft_remove_db(char *l, int x)
+{
+	int		ch;
+	int		i;
+	int		c;
+	int		len;
+
+	i = 0;
+	c = ft_ex_i(l);
+	len = 0;
+	ch = 0;
+	while (l[i])
+	{
+		if (l[i] != c)
+			len++;
+		if (c == l[i])
+			ch++;
+		i++;
+		if (ch % 2 == 0 && ch != 0)
+		{
+			ch = 0;
+			c = ft_ex_i(l + i);
+		}
+	}
+	return (ft_remove_db2(l, x, len, 0));
+}
+
 int	ft_check_quote(char **full_cmd)
 {
 	int	i;
@@ -106,7 +113,7 @@ int	ft_check_quote(char **full_cmd)
 	{
 		if (ft_chrafterr(full_cmd[i], ft_strlen(full_cmd[i])) == 0)
 		{
-			printf("Parse error: Unclosed Quotes\n");
+			ft_putstr_fd("Parse error: Unclosed Quotes\n", 2);
 			return (1);
 		}
 		i++;

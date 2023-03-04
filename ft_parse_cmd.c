@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 03:37:59 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/03 15:42:48 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 05:04:40 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_check_file(t_cmd *cmd, char **token)
 int	ft_if_red(char *token, char **dr)
 {
 	size_t	len;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (dr[i])
@@ -64,7 +64,7 @@ void	ft_full_cmd(char **token, char **cmd, char **dr)
 		{
 			cmd[c] = ft_strdup(token[i]);
 			if (ft_count_c(cmd[c], '$'))
-				cmd[c] = ft_before_expend(cmd[c]);
+				cmd[c] = ft_before_expend(cmd[c], 1);
 			if (ft_count_c(cmd[c], 34) || ft_count_c(cmd[c], 39))
 				cmd[c] = ft_remove_db(cmd[c], 1);
 			c++;
@@ -92,14 +92,12 @@ void	ft_check_in(t_cmd *cmd, char **token)
 		cmd->infile = -1;
 }
 
-void	ft_parse_cmd(t_cmd *cmd, char **token)
+void	ft_parse_cmd(t_cmd *cmd, char **token, int count)
 {
 	char	**dr;
 	int		i;
-	size_t		l;
-	int		count;
+	size_t	l;
 
-	count = 0;
 	ft_check_her(cmd, token, 0);
 	ft_check_file(cmd, token);
 	ft_check_in(cmd, token);
