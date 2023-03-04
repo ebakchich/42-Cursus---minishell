@@ -6,11 +6,27 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 02:42:55 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/03 22:03:26 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 06:02:37 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_join_all2(char **ex)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	line = ft_strdup("");
+	while (ex[i])
+	{
+		line = ft_strjoin(line, ex[i]);
+		i++;
+	}
+	ft_free(NULL, ex);
+	return (line);
+}
 
 char	*add_befor_c(char *line, int c)
 {

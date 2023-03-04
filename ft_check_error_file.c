@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:15:37 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/03 15:05:57 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 03:17:09 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,37 @@ int	ft_check_error_file(char *name, int j, t_cmd *cmd)
 	return (1);
 }
 
-int	ft_check_ambiguous(char *line)
+int	ft_check_ambiguous(char *line, int i)
 {
-	int	i;
-
-	i = 0;
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (line[i] == '\0')
+	{
+		free(line);
 		return (1);
+	}
 	while (line[i] && line[i] != ' ')
 		i++;
 	if (line[i] == '\0')
+	{
+		free(line);
 		return (0);
+	}
 	while (line[i] && line[i] == ' ')
 		i++;
 	if (line[i] != '\0')
+	{
+		free(line);
 		return (1);
+	}
+	free(line);
 	return (0);
 }
 
 char	*ft_get_fd2(t_cmd *cmd, char *t, int j)
 {
 	if (ft_count_c(t, 36))
-		t = ft_before_expend(t);
+		t = ft_before_expend(t, 1);
 	if (ft_count_c(t, 34) || ft_count_c(t, 39))
 		t = ft_remove_db(t, 1);
 	if (t[0] == '\0')
@@ -101,7 +108,7 @@ char	*ft_get_fd2(t_cmd *cmd, char *t, int j)
 void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 {
 	char	*ptr;
-	size_t		len;
+	size_t	len;
 	int		i;
 
 	i = 0;
@@ -113,8 +120,8 @@ void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 		if (ft_memcmp(t[i], str, len) == 0)
 		{
 			ptr = ft_strdup(t[i + 1]);
-			ptr = ft_before_expend(ptr);
-			if (ft_check_ambiguous(ptr) && ft_count_c(t[i + 1], '$'))
+			ptr = ft_before_expend(ptr, 1);
+			if (ft_check_ambiguous(ptr, 0) && ft_count_c(t[i + 1], '$'))
 			{
 				cmd->if_v = -1;
 				g_ex.exit_status = 1;
@@ -122,7 +129,6 @@ void	ft_get_fd(t_cmd *cmd, char **t, char *str, int j)
 			}			
 			else
 				t[i + 1] = ft_get_fd2(cmd, t[i + 1], j);
-			free(ptr);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:37:21 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/03/02 18:35:54 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 05:07:50 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	ft_check_her(t_cmd *cmd, char **token, int i)
 	if (l == 0)
 		return ;
 	del = ft_ex_del(token, l);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_handler);
 	while (i < l)
 	{
 		count = ft_count_c(del[i], 34) + ft_count_c(del[i], 39);
@@ -94,7 +96,7 @@ void	ft_check_her(t_cmd *cmd, char **token, int i)
 		del[i] = ft_remove_c2(del[i], ' ');
 		ft_check_her2(cmd, del[i], 1, 0);
 		if (count == 0 && ft_count_c(cmd->her, 36))
-			cmd->her = ft_expend(cmd->her);
+			cmd->her = ft_before_expend(cmd->her, 0);
 		i++;
 	}
 	ft_free(NULL, del);

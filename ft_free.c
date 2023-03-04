@@ -6,17 +6,30 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 22:13:31 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/20 17:40:35 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 04:47:50 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free(char *p, char **p2)
+char	*ft_rm_tab(char *line)
 {
 	int	i;
 
 	i = 0;
+	while (line[i])
+	{
+		if (line[i] == 9 && ft_chrafterr(line, i))
+			line[i] = ' ';
+		i++;
+	}
+	return (line);
+}
+
+void	ft_free(char *p, char **p2)
+{
+	int	i;
+
 	i = 0;
 	if (p2 != NULL)
 	{

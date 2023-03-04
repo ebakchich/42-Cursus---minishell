@@ -6,7 +6,7 @@
 /*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:46:29 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 13:44:05 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 04:24:11 by ebakchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	ft_error(char **cmd)
 {
-	int	count;
 	int	i;
 	int	j;
 
-	count = 0;
 	i = 1;
 	while (cmd[i])
 	{
@@ -31,7 +29,8 @@ void	ft_error(char **cmd)
 		{
 			if ((cmd[i][j] < 48 || cmd[i][j] > 57) && cmd[i][j] > 0 && i == 1)
 			{
-				printf("exit\nminishell: exit: %s: numeric argument required\n", cmd[i]);
+				ft_putstr_fd("exit\n", 1);
+				ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 				exit (255);
 			}
 			j++;
@@ -45,7 +44,11 @@ void	ft_error(char **cmd)
 void	ft_error2(char **cmd)
 {
 	if (ft_atoi(cmd[1]) >= 0)
+	{
+		ft_putstr_fd("exit\n", 1);
 		exit (ft_atoi(cmd[1]));
+	}
+	ft_putstr_fd("exit\n", 1);
 	exit ((-256 + ft_atoi(cmd[1])) + 256);
 }
 
@@ -57,10 +60,14 @@ void	ft_exit(t_cmd *cmd)
 	while (cmd[0].cmd[i])
 		i++;
 	if (i == 1)
+	{
+		ft_putstr_fd("exit\n", 2);
 		exit (0);
+	}
 	ft_error(cmd[0].cmd);
 	if (i == 2)
 		ft_error2(cmd[0].cmd);
-	printf("minishell: exit: too many arguments\n");
+	ft_putstr_fd("exit\n", 1);
+	ft_putstr_fd("minishell: exit: too many arguments", 1);
 	g_ex.exit_status = 1;
 }
