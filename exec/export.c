@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:07:12 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 20:19:50 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 07:45:23 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,25 @@ int	joinenv(t_var **var, char *cmd)
 	return (0);
 }
 
-int	repenv(t_var *data, char *var, int pos)
+int	repenv(t_var *data, char *var, int pos, int len)
 {
 	char	**nenv;
 	int		i;
 	int		j;
-	int		len;
 
-	len = len_matrix(data->env);
 	i = 0;
 	j = 0;
 	nenv = malloc(sizeof(char *) * len + 1);
+	if (!nenv)
+		return (export_err(NULL, 2));
 	while (i < len)
 	{
-		if (pos == i)
-		{
-			nenv[i++] = ft_strdup(var);
+		if (pos == i && fill_ex(&i, nenv, var) == 0)
 			j++;
-		}
-		nenv[i] = ft_strdup(data->env[j]);
-		i++;
-		j++;
+		if (data->env[j])
+			nenv[i++] = ft_strdup(data->env[j++]);
+		else
+			j++;
 	}
 	nenv[i] = NULL;
 	free_matrix(data->env);
@@ -77,13 +75,13 @@ int	appenv(t_var **data, char *var)
 	while (i < len)
 	{
 		nenv[i] = ft_strdup((*data)->env[i]);
-		if (!nenv[i])
-			return (err_alloc("strjoin1"));
+		if (!nenv[i] && (*data)->env[i])
+			return (err_alloc("strdup"));
 		i++;
 	}
 	nenv[i] = ft_strdup(var);
 	if (!nenv[i])
-		return (err_alloc("strjoin1"));
+		return (err_alloc("strdup"));
 	nenv[i + 1] = NULL;
 	free_matrix((*data)->env);
 	(*data)->env = nenv;

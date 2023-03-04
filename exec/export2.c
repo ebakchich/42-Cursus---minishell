@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:07:12 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 18:48:54 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 07:46:59 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,17 @@ int	ft_export2(t_var *var, char *cmd, int flag)
 		if (!tmp)
 			return (0);
 		else
-			repenv(var, ft_strdup(cmd), pos);
+			repenv(var, ft_strdup(cmd), pos, len);
 	}
 	else if (findenv(var, cmd, &pos) == 1)
 		appenv(&var, ft_strdup(cmd));
+	return (0);
+}
+
+int	fill_ex(int *i, char **nenv, char *var)
+{
+	nenv[(*i)++] = ft_strdup(var);
+	if (!nenv[(*i) - 1] && var)
+		return (export_err(nenv[(*i) - 1], 2));
 	return (0);
 }

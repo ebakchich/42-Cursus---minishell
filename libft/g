@@ -1,0 +1,11 @@
+▶ minishell $ export a
+▶ minishell $ unset
+▶ minishell $ export  
+declare -x a
+▶ minishell $ cd /bin
+▶ minishell $ ls
+minishell: No such file or directory
+▶ minishell $ cd /bin
+▶ minishell $ cd /bin
+
+env -i ./minishell 

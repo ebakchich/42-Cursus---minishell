@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+         #
+#    By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 02:43:28 by ebakchic          #+#    #+#              #
-#    Updated: 2023/03/03 15:18:28 by ebakchic         ###   ########.fr        #
+#    Updated: 2023/03/04 08:11:58 by yoyahya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME    = minishell
 LBFT	= libft/libft.a
 CC		= cc -g
 CFLAGS  = -Wall -Wextra -Werror
-CRL		= -lreadline -L /Users/ebakchic/homebrew/Cellar/readline/8.2.1/lib -I /Users/ebakchic/homebrew/Cellar/readline/8.2.1/include -fsanitize=address
+CRL		= -lreadline -L /Users/ebakchic/homebrew/Cellar/readline/8.2.1/lib -I /Users/ebakchic/homebrew/Cellar/readline/8.2.1/include #-fsanitize=address
 MAKEC	= make clean
 MAKEF	= make fclean
 MAKER	= make re

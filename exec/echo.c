@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:10:28 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/02 18:44:15 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 04:03:26 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	countn(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[0] == '-')
-			i++;
-		if (str[i] != 'n')
+		if (str[0] != '-')
+			return (i);
+		if (i != 0 && str[i] != 'n')
 			return (i);
 		i++;
 	}

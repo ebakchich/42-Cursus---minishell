@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:58:40 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/02/27 20:02:57 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 06:05:23 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ char	**dup_matrix(char **env)
 	i = 0;
 	len = len_matrix(env);
 	nenv = malloc(sizeof(char *) * (len + 1));
+	if (!nenv)
+	{
+		perror("minishell");
+		return (NULL);
+	}
 	while (env[i])
 	{
 		nenv[i] = ft_strdup(env[i]);

@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:45:58 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 18:24:49 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 04:16:23 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ int	ft_exec(t_var *data, t_cmd *cmd)
 		&& ncmd == 1 && !is_builtin(cmd[0].cmd[0]))
 		return (sin_cmd(data, cmd));
 	while (++i < ncmd)
-	{
-		if (cmd[i].if_v != -1 && cmd[i].cmd)
-			pip_in = mult_cmd(&cmd[i], data, pip_in, i);
-	}
+		pip_in = mult_cmd(&cmd[i], data, pip_in, i);
 	if (pip_in != 0)
 		close(pip_in);
 	waitpro(cmd->num_pip, &status);

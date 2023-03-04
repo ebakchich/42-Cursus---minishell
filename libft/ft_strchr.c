@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:54:58 by ebakchic          #+#    #+#             */
-/*   Updated: 2021/11/28 14:35:10 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 04:37:08 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strchr(const char *s, int c)
 	char	ca;
 	size_t	i;
 
+	if(!s)
+		return (NULL);
 	str = (char *)s;
 	ca = (char)c;
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebakchic <ebakchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 11:57:52 by ebakchic          #+#    #+#             */
-/*   Updated: 2023/02/21 00:58:28 by ebakchic         ###   ########.fr       */
+/*   Updated: 2023/03/04 07:13:12 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s1)
 	int		i;
 	int		size;
 
+	if (s1 == NULL)
+		return (NULL);
 	if (s1 == NULL)
 	{
 		cup = malloc(1 * sizeof(char));

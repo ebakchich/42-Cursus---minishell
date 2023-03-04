@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:47:53 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 20:20:52 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 07:21:30 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int	export_err(char *str, int flag)
 	}
 	else if (flag == 2)
 		ft_putendl_fd("minishell: Error in malloc", 2);
+	else if (flag == 3)
+	{
+		free(str);
+		ft_putendl_fd("minishell: Error in malloc", 2);
+	}
 	return (1);
 }
 

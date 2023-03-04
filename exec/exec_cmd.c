@@ -6,7 +6,7 @@
 /*   By: yoyahya <yoyahya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:44:13 by yoyahya           #+#    #+#             */
-/*   Updated: 2023/03/03 18:41:14 by yoyahya          ###   ########.fr       */
+/*   Updated: 2023/03/04 07:16:55 by yoyahya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exec_cmd(t_cmd *cmd, t_var *var)
 	}
 	if (execve(command, cmd[0].cmd, var->env) == -1)
 	{
-		perror("minishell:");
+		perror("minishell");
 		exit(126);
 	}
 	exit(0);
@@ -95,10 +95,13 @@ void	child_proc(t_cmd *cmd, t_var *var, int *pip, int *pip_i)
 		close(pip[1]);
 	else if (cmd->outfile == -1)
 		dup2(pip[1], 1);
-	if (cmd->cmd[0] && !is_builtin(cmd->cmd[0]))
-		exec_cmd(cmd, var);
-	else
-		builtin(cmd, var, 1);
+	if (cmd->cmd && cmd->if_v != -1)
+	{
+		if (cmd->cmd[0] && !is_builtin(cmd->cmd[0]))
+			exec_cmd(cmd, var);
+		else
+			builtin(cmd, var, 1);
+	}
 	exit(0);
 }
 
